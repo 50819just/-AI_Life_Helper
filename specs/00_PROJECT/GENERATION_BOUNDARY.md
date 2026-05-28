@@ -40,8 +40,19 @@ Do not generate full screens for:
 Only generate the selected screen or module.
 Do not merge unrelated modules into the same screen.
 Do not expand demo modules into full commercial product systems.
-Coming Soon modules should appear only as disabled or preview cards.
+Coming Soon modules should appear only as disabled or preview cards inside Module Library / More Modules, not directly on Home.
 ```
+
+## Mode Generation Order
+
+Default generation order:
+
+```txt
+Light Mode first.
+Dark / Night / Nocturnal variants only after the Light Mode screen is approved.
+```
+
+Do not start with dark mode, even for bedtime or sleep-related modules. Bedtime context can be represented in content, hierarchy, and tone while still using the approved Light Mode direction.
 
 ## Do Not Generate
 Do not generate:
@@ -60,6 +71,7 @@ When using Stitch:
 - Use `DEMO_SCOPE.md` and this file as scope guardrails.
 - Use scenario specs only when generating their parent module scenario.
 - Do not ask Stitch to create all modules in one prompt.
+- Do not generate Dark / Night / Nocturnal variants unless Light Mode has already been accepted and the user explicitly asks for them.
 
 ## Cursor Boundary
 When using Cursor:
@@ -92,10 +104,24 @@ All generated screens should consider:
 Mobile navigation must remain:
 
 ```txt
-Home / AI Assistant / Smart Home / Reminder
+Home / Devices / Tasks / Settings
 ```
 
-Settings should be accessed from Profile, top-right icon, or More menu.
+Settings is the fourth item in mobile bottom navigation. On desktop it can also appear in profile, top-right icon, or sidebar bottom utility.
 
 ## Stitch / Cursor / Codex Usage Notes
 Use this file before every generation pass to prevent scope drift. If a generation result creates a full platform, large dashboard, or unrelated module detail, treat it as out of scope and refine the prompt.
+
+
+## Visual Boundary / Light Mode Color Guardrails
+
+For the current Light Mode direction, avoid the default preset drifting into heavy black UI.
+
+Do not generate:
+- pure black surfaces
+- black sidebar backgrounds
+- black module cards
+- huge black CTA blocks
+- high-saturation green accents
+
+Use softened Atmospheric Glassmorphism Light Mode instead: warm white, pale mint, soft teal, soft blue, lavender / blue shadows, and slate text.

@@ -174,3 +174,12 @@ When generating this module:
 
 ## Stitch MCP Description
 Create a Smart Home Control demo module for AI Life Assistant. Show a calm smart home device dashboard with light on/off, brightness, color temperature, simple smart scenes, and an AI-recommended scene. Use Stitch light/dark presets, soft glassmorphism, high readability, and low-brightness night behavior. Do not generate a complete smart home platform or automation builder.
+
+## Visual / Mobile Implementation Lock
+
+- Light Mode uses softened Atmospheric Glassmorphism: warm white, pale mint, soft teal, soft blue, lavender / blue shadow.
+- Do not use pure black, large dead-black surfaces, black sidebar, black device cards, or high-saturation green.
+- Dark Mode uses the stable Nocturnal Clarity system in the next UI pass; do not mix dark tokens into Light Mode.
+- Mobile order: title → AI recommended scene → primary device cards → lighting controls → simple scenes → Sleep Mode.
+- Mobile controls need thumb-friendly hit areas; sliders must be easy to drag.
+- Bottom nav active context: Devices.

@@ -12,12 +12,12 @@ AI Life Assistant 的 Light / Dark mode 色彩 token 以 Stitch preset 為主，
 ### Light Mode
 - Source：`03_DESIGN_SYSTEM/STITCH_PRESET_ATMOSPHERIC_GLASSMORPHISM_LIGHT_MODE.md`
 - Style：Atmospheric Glassmorphism / Early Morning Clarity
-- Direction：soft light background、frosted white glass surfaces、obsidian text / actions、mint and indigo accents
+- Direction：softened light background、frosted white glass surfaces、pale mint、soft teal、soft blue、lavender / blue shadow、slate text only
 
 ### Dark Mode
 - Source：`03_DESIGN_SYSTEM/STITCH_PRESET_NOCTURNAL_CLARITY_DARK_MODE.md`
 - Style：Nocturnal Clarity / Dark mode glassmorphism
-- Direction：deep navy background、mint primary glow、pale frost secondary、glass surface layers
+- Direction：stable Nocturnal Clarity system：deep navy background、restrained mint glow、pale frost secondary、glass surface layers
 
 ---
 
@@ -57,3 +57,14 @@ AI Life Assistant 的 Light / Dark mode 色彩 token 以 Stitch preset 為主，
 
 ## Stitch MCP 可理解描述
 Use Stitch presets as the primary color token source. Light Mode follows Atmospheric Glassmorphism. Dark Mode follows Nocturnal Clarity. Do not create a separate competing palette. Keep AI Life Assistant calm, readable, lifestyle-oriented, low-distraction, and comfortable for smart home night usage.
+
+## Dark Mode Stability Lock
+
+Dark Mode should keep using the existing Stitch / Nocturnal Clarity system as the stable source of truth. Do not soften Dark Mode into the Light palette.
+
+Dark UI direction:
+- Source: `03_DESIGN_SYSTEM/STITCH_PRESET_NOCTURNAL_CLARITY_DARK_MODE.md`
+- Keep deep navy / nocturnal glass structure.
+- Keep mint glow restrained and readable.
+- Avoid neon, cyberpunk, high-saturation glow, or random black blocks.
+- Tomorrow's Dark UI pass should refine screens from the stable Nocturnal Clarity system, not invent a new dark design system.

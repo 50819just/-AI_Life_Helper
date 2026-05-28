@@ -149,3 +149,14 @@ The shape language is "Rounded" to maintain the friendly yet professional tone.
 - **Lists:** Horizontal dividers are avoided. Use subtle vertical spacing and a slight background tint change on hover to indicate row selection.
 - **Cards:** Glass cards should include a subtle gradient overlay (top-left to bottom-right) from 5% white to 0% white to simulate a glass surface's natural light falloff.
 - **Status Indicators:** Use "Glowing Pips"—small circular indicators with a 4px outer glow in the color of the status (Mint for success, Red-Orange for errors).
+
+## Dark Mode Stability Lock
+
+Dark Mode should keep using the existing Stitch / Nocturnal Clarity system as the stable source of truth. Do not soften Dark Mode into the Light palette.
+
+Dark UI direction:
+- Source: `03_DESIGN_SYSTEM/STITCH_PRESET_NOCTURNAL_CLARITY_DARK_MODE.md`
+- Keep deep navy / nocturnal glass structure.
+- Keep mint glow restrained and readable.
+- Avoid neon, cyberpunk, high-saturation glow, or random black blocks.
+- Tomorrow's Dark UI pass should refine screens from the stable Nocturnal Clarity system, not invent a new dark design system.

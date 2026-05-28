@@ -16,19 +16,19 @@ colors:
   outline: '#76777d'
   outline-variant: '#c6c6cd'
   surface-tint: '#565e74'
-  primary: '#000000'
+  primary: '#1E293B'
   on-primary: '#ffffff'
-  primary-container: '#131b2e'
-  on-primary-container: '#7c839b'
+  primary-container: '#CCFBF1'
+  on-primary-container: '#1E293B'
   inverse-primary: '#bec6e0'
-  secondary: '#006b5f'
-  on-secondary: '#ffffff'
-  secondary-container: '#62fae3'
-  on-secondary-container: '#007165'
-  tertiary: '#000000'
-  on-tertiary: '#ffffff'
-  tertiary-container: '#07006c'
-  on-tertiary-container: '#7073ff'
+  secondary: '#2DD4BF'
+  on-secondary: '#0F172A'
+  secondary-container: '#DDFCF5'
+  on-secondary-container: '#334155'
+  tertiary: '#818CF8'
+  on-tertiary: '#1E293B'
+  tertiary-container: '#EDEBFF'
+  on-tertiary-container: '#334155'
   error: '#ba1a1a'
   on-error: '#ffffff'
   error-container: '#ffdad6'
@@ -105,18 +105,18 @@ The target audience consists of high-end professionals and creative enthusiasts 
 
 ## Colors
 
-The palette is anchored in a high-contrast relationship between a multi-tonal atmospheric background and ultra-dark interactive elements. 
+The palette is anchored in a soft relationship between a multi-tonal atmospheric background, misty glass surfaces, and restrained slate typography.
 
 - **Environment:** The background is a fluid, three-point radial gradient using **White**, **Pale Mint**, and **Soft Blue**. This creates an "early morning" glow that shifts subtly during interaction.
 - **Glass Surfaces:** Cards use a semi-transparent white (`rgba(255, 255, 255, 0.4)`) to allow background colors to bleed through while maintaining a "frosted" texture.
-- **Primary Contrast:** To ensure accessibility, all text and primary actions use a deep, obsidian slate. This provides a "sharp" anchor against the soft, blurred surroundings.
+- **Primary Contrast:** To ensure accessibility, all text uses a deep but softened slate / obsidian tone. This provides a "sharp" anchor against the soft, blurred surroundings.
 - **Accents:** Use Mint and Indigo sparingly for success states or high-energy micro-interactions.
 
 ## Typography
 
-This design system utilizes **Plus Jakarta Sans** across all levels to maintain a modern, friendly, yet highly legible appearance. 
+This design system utilizes **Plus Jakarta Sans** across all levels to maintain a modern, friendly, yet highly legible appearance.
 
-The typographic hierarchy is characterized by significant contrast in scale. Display headings are intentionally large and tightly tracked to feel like physical "objects" on the glass. Body copy is given generous line height to ensure readability against the translucent, high-blur backgrounds. 
+The typographic hierarchy is characterized by significant contrast in scale. Display headings are intentionally large and tightly tracked to feel like physical "objects" on the glass. Body copy is given generous line height to ensure readability against the translucent, high-blur backgrounds.
 
 For mobile, headlines scale down slightly to prevent excessive wrapping, while maintaining the bold weight that defines the brand's premium character.
 
@@ -125,7 +125,7 @@ For mobile, headlines scale down slightly to prevent excessive wrapping, while m
 The layout philosophy follows a **Fixed-Fluid Hybrid** model. Content is contained within a 1280px central track on desktop, while margins and background gradients expand to fill the viewport, enhancing the immersive feel.
 
 - **Grid:** A 12-column grid with 24px gutters.
-- **Rhythm:** An 8px linear scale governs all padding and margins. 
+- **Rhythm:** An 8px linear scale governs all padding and margins.
 - **Density:** Use generous spacing (64px+) between major sections to allow the atmospheric background to "breathe." Glass cards should have internal padding of at least 32px to maintain a premium, spacious feel.
 
 ## Elevation & Depth
@@ -139,14 +139,14 @@ Depth is the primary driver of the user experience in this design system. Instea
 
 ## Shapes
 
-The shape language is consistently **Rounded (Level 2)**. 
+The shape language is consistently **Rounded (Level 2)**.
 
 Standard components (Cards, Inputs) use a **16px (1rem)** corner radius. Larger containers or hero cards scale up to **24px (1.5rem)**. This curvature mimics the organic flow of the background gradients and softens the high-contrast typography, contributing to the approachable, premium aesthetic. Buttons should remain consistent with the card radius to ensure a cohesive visual language.
 
 ## Components
 
 ### Buttons
-Primary buttons are solid Obsidian (#0F172A) with white text. They should feel heavy and grounded. Secondary buttons use the "Glass" style: semi-transparent white with a 1px border and high blur.
+Primary buttons prefer soft teal / pale mint glass treatment with slate text. Avoid heavy black blocks. Secondary buttons use the "Glass" style: semi-transparent white with a 1px border and high blur.
 
 ### Cards
 Cards are the hero of the design system. They must use the `blur-3xl` value. To maintain text contrast, never use a card background opacity lower than 40%. Ensure cards have a subtle 1px white border.
@@ -159,3 +159,27 @@ Small, pill-shaped elements that use the **Secondary Mint** or **Tertiary Indigo
 
 ### Lists
 List items should be separated by thin, 1px lines at 10% opacity. Avoid heavy dividers. Use the Obsidian color for icons to ensure they pop against the soft background.
+
+
+## Color Guardrails / 避免詭異黑色
+
+Although the base preset may include pure black tokens, AI Life Assistant should use a softened Light Mode interpretation.
+
+Required color direction:
+- warm white background
+- pale mint ambient glow
+- soft teal accents
+- soft blue translucent surfaces
+- lavender / blue shadows
+- misty glass cards
+- obsidian / slate only for text, icons, or very small emphasis
+
+Strict rules:
+- Do not use pure black `#000000` in generated UI surfaces.
+- Do not use large dead-black areas.
+- Do not use black sidebar backgrounds.
+- Do not use black module cards.
+- Do not use high-saturation green.
+- Primary CTAs should prefer soft teal / pale mint glass treatment with slate text, or restrained slate text buttons.
+- If dark text is needed, prefer `#1E293B` or `#334155` instead of pure black.
+- Obsidian is allowed only as readable typography / icon color / tiny emphasis, not as a large visual block.

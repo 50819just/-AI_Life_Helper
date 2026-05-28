@@ -5,10 +5,10 @@
 
 ## 初版規格
 - Home：AI Greeting、今日摘要、模組入口、智慧家庭快捷控制、提醒預覽。
-- AI Assistant：自然語言詢問、生活建議、提醒建立、家電控制意圖理解。
+- Ask AI / AI Assistant：自然語言詢問、生活建議、提醒建立、家電控制意圖理解；mobile 以 floating entry 進入，不放 bottom nav。
 - Smart Home：設備列表、房間分類、燈光控制、On / Off 狀態、夜間操作。
-- Reminder：提醒清單、今日提醒、建立提醒、完成狀態。
-- Settings：不放 Bottom Nav，包含帳號、偏好、主題、設備連線設定。
+- AI Life Reminder：今日提醒、睡前提醒、喝水提醒、久未移動提醒、行程提醒、personal checklist、completed / missed / paused states。
+- Settings：Mobile Bottom Nav 第四項；包含帳號、偏好、主題、設備連線設定。
 
 ## UX 規則
 - 每個功能入口需避免資訊過載。
@@ -16,12 +16,12 @@
 - 危險或影響環境的操作，例如關閉大量設備，需有清楚狀態回饋。
 
 ## Responsive 規則
-- Mobile Bottom Nav 固定四項：Home、AI Assistant、Smart Home、Reminder。
-- Setting 由右上角 icon、profile card 或更多選單進入。
+- Mobile Bottom Nav 固定四項：Home、Devices、Tasks、Settings。
+- Settings 固定為 mobile bottom nav 第四項；desktop 可由 sidebar bottom utility、右上角 icon 或 profile card 進入。
 - Desktop 可使用側邊導覽或頂部導覽，但需保留核心四模組一致性。
 
 ## Stitch MCP 可理解描述
-產生一套生活 AI 產品資訊架構，以 Home 為中心連到 AI Assistant、Smart Home、Reminder，Settings 作為次級入口，不出現在 mobile bottom nav。
+產生一套生活 AI 產品資訊架構，以 Home 為中心連到三個正式 demo modules：明日簡報、智慧家庭控制、AI 生活提醒。Mobile bottom nav 使用 Home / Devices / Tasks / Settings，Ask AI 以獨立 floating entry 進入。
 
 ## i18n / 中英切換
 - MVP 需支援繁體中文 / English 兩種語言。

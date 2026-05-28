@@ -1,151 +1,164 @@
 # PART 2 — Module Flow
 
 ## 文件用途
-把 AI Life Assistant 的三個核心模組拆成第二段流程，專門處理模組內部功能，不和首頁、Dashboard、Settings 混在一起。
+把 AI Life Assistant 的三個核心模組拆成第二段流程，專門處理模組內部功能，不和 Home、Settings、Module Library 混在一起。
 
-## Flow Scope
-此段只處理：
-- Tomorrow Briefing 模組
-- Smart Home Control 模組
-- AI Life Reminder 模組
+## Current Scope Lock
 
-入口與全域導覽請放在 `PART_1_HOME_DASHBOARD_MODULE_LIBRARY_FLOW.md`。
+三個正式 Demo Modules：
+1. Tomorrow Briefing / 明日簡報
+2. Smart Home Control / 智慧家庭控制
+3. AI Life Reminder / AI 生活提醒
+
+這三個模組都要有完整 demo flow，但不展開成完整商業產品功能。
+
+## Visual Lock
+- Light UI：softened Atmospheric Glassmorphism。避免純黑、大面積死黑、黑色 sidebar、黑色卡片、高飽和綠色。
+- Dark UI：Nocturnal Clarity 是目前穩定 system，明天再做 dark pass，不在 Light pass 混入。
+- Desktop module screen 沿用 left sidebar app shell。
+- Mobile module screen 沿用 bottom nav `Home / Devices / Tasks / Settings`，Ask AI 另用 floating entry。
 
 ---
 
-## 1. Tomorrow Briefing 模組
+## 1. Tomorrow Briefing / 明日簡報
 
 ```text
-Tomorrow Briefing
+Tomorrow Briefing / 明日簡報
 │
-├── Calendar Sync
-│   ├── Google Calendar
-│   ├── Apple Calendar
-│   └── Outlook
+├── Sleep-time Context
+│   ├── 目前時間 / 睡前情境
+│   ├── 明天是否有重要行程
+│   └── AI 主動整理明天重點
 │
-├── Today Schedule
-│   ├── Timeline View
-│   ├── Meeting Card
-│   ├── Event Detail
-│   └── AI Summary
+├── Tomorrow First Important Event
+│   ├── 明天第一個重要行程
+│   ├── 時間
+│   ├── 地點 / 線上會議
+│   └── 準備提醒
 │
-├── Tomorrow Preview
-│   ├── First Event
-│   ├── Wake-up Suggestion
-│   ├── Travel Time
-│   ├── Weather Reminder
-│   └── Schedule Conflict
+├── AI Wake-up Suggestion
+│   ├── 建議起床時間
+│   ├── 建議原因
+│   ├── 準備緩衝時間
+│   └── 一鍵設定鬧鐘
 │
-├── AI Analysis
-│   ├── Sleep Suggestion
-│   ├── Productivity Analysis
-│   ├── Busy Level
-│   └── Break Time Suggestion
+├── Preparation Checklist
+│   ├── 會議資料
+│   ├── 筆電 / 手機充電
+│   ├── 會議連結
+│   └── 其他 3–5 個低壓提醒
 │
-└── Reminder System
-    ├── Alarm Suggestion
-    ├── Smart Notification
-    ├── AI Voice Reminder
-    └── Preparation Checklist
+└── Completion State
+    ├── 鬧鐘已設定
+    ├── 準備清單已確認
+    └── 明日準備完成，可以放心休息
 ```
 
 ### UX Notes
-- 主要目的：幫使用者理解今天與明天的節奏，提前準備。
-- 核心畫面可分為：Today Schedule、Tomorrow Preview、AI Analysis。
-- 提醒語氣要溫和，不要製造壓力。
-- Calendar Sync 屬於設定 / onboarding 性質，不一定要常駐在主畫面。
+- 核心問題：我現在可以安心睡了嗎？明天準備好了嗎？
+- 不要設計成完整 Calendar Dashboard、行事曆 SaaS 或 Productivity Analysis。
+- 首屏優先顯示「明天第一個重要行程」與「是否需要早起」。
+- Demo 必須有閉環：設定鬧鐘 / 確認清單 / 明日準備完成。
+
+### Mobile Notes
+- 單欄順序：標題 → 安心摘要 → 第一個重要行程 → 起床建議 → 鬧鐘 CTA → checklist → completion。
+- 鬧鐘 CTA 不可藏在文字連結；需是 44–48px 以上可點擊按鈕。
 
 ---
 
-## 2. Smart Home Control 模組
+## 2. Smart Home Control / 智慧家庭控制
 
 ```text
-Smart Home Control
+Smart Home Control / 智慧家庭控制
 │
 ├── Device Dashboard
-│   ├── Main Light
-│   ├── Bedroom Light
-│   ├── Living Room
-│   └── Air Conditioner
+│   ├── 客廳主燈
+│   ├── 臥室燈
+│   ├── 書桌燈
+│   └── 空調（可選）
 │
 ├── Lighting Control
 │   ├── ON / OFF
 │   ├── Brightness
-│   ├── Color Temperature
-│   └── RGB Mood Light
+│   └── Color Temperature
 │
-├── Smart Scene
-│   ├── Sleep Mode
-│   ├── Work Mode
-│   ├── Movie Mode
-│   ├── Away Mode
-│   └── Wake-up Mode
+├── Simple Scenes
+│   ├── 專注
+│   ├── 放鬆
+│   ├── 睡前 / Sleep Mode
+│   └── 全部關燈
 │
-├── Automation
-│   ├── Auto Turn Off
-│   ├── Motion Detection
-│   ├── Auto Dim
-│   └── AI Recommended Scene
+├── AI Recommended Scene
+│   ├── 晚間放鬆
+│   ├── 睡前低刺激光線
+│   └── 套用建議
 │
 └── Device Status
     ├── Online
-    ├── Battery
-    ├── Wi-Fi Status
-    └── Usage History
+    ├── Offline
+    ├── Processing
+    └── Error
 ```
 
 ### UX Notes
-- 主要目的：快速控制家電與情境模式，尤其是燈光與睡眠場景。
-- 夜間模式要低亮度、低刺激，避免突然大面積高亮。
-- 高影響操作，例如 Away Mode 或全部關燈，可提供簡短確認。
-- Device Status 應清楚但不過度搶眼。
+- 展示範圍是基本 device dashboard、燈光控制、simple scenes、Sleep Mode、AI recommended scene。
+- Sleep Environment 是子情境，不是整個 Smart Home Control。
+- 不做完整智慧家庭平台、automation builder、security dashboard 或設備 marketplace。
+- 高影響操作，例如全部關燈，可提供簡短確認。
+
+### Mobile Notes
+- 主要控制要放在拇指容易點擊區。
+- Slider thumb 要夠大，避免亮度 / 色溫控制難拖曳。
+- On / Off 不只靠顏色，也要有文字或 icon。
 
 ---
 
-## 3. AI Life Reminder 模組
+## 3. AI Life Reminder / AI 生活提醒
 
 ```text
-AI Life Reminder
+AI Life Reminder / AI 生活提醒
 │
-├── Daily Reminder
-│   ├── Schedule Reminder
-│   ├── Drink Water
-│   ├── Medicine Reminder
-│   └── Sleep Reminder
+├── Today Reminders
+│   ├── 喝水提醒
+│   ├── 久未移動提醒
+│   ├── 行程提醒
+│   └── 睡前提醒
 │
-├── Smart Detection
-│   ├── No Movement
-│   ├── Long Screen Time
-│   ├── Late Night Warning
-│   └── Health Suggestion
+├── AI Suggestion
+│   ├── 今日節奏建議
+│   ├── 補水 / 走動提醒
+│   └── 可加入提醒
 │
-├── Leaving Home Reminder
-│   ├── Lights Still On
-│   ├── AC Still Running
-│   ├── Door Lock Check
-│   └── Wallet / Key Reminder
+├── Reminder States
+│   ├── Completed
+│   ├── Missed
+│   ├── Upcoming
+│   └── Paused
 │
-├── Sleep Assistant
-│   ├── Relax Music
-│   ├── AI Voice
-│   ├── Do Not Disturb
-│   └── Screen Dim
+├── Bedtime Reminder
+│   ├── 收拾桌面
+│   ├── 充電
+│   └── 明日行程確認
 │
-└── AI Suggestion
-    ├── Stress Analysis
-    ├── Rest Suggestion
-    ├── Mood Support
-    └── Personalized Advice
+└── Personal Checklist
+    ├── 水壺
+    ├── 鑰匙
+    ├── 筆電
+    └── 文件
 ```
 
 ### UX Notes
-- 主要目的：提供生活提醒與 AI 輔助，不是監控或施壓。
-- Smart Detection 相關內容要注意語氣，避免讓使用者感到被責備。
-- Leaving Home Reminder 可設計成離家前檢查清單。
-- Sleep Assistant 應偏安定、舒緩、低亮度。
+- 主要目的：提供溫和生活提醒與 AI 輔助，不是監控或施壓。
+- 不做健康管理平台、醫療系統、嚴格 todo app 或長 backlog。
+- Missed state 要像可恢復狀態，不像失敗警告。
+- Personal Reminders 是子情境，不是整個 AI Life Reminder。
+
+### Mobile Notes
+- 完成、延後、暫停要清楚分開，避免誤按。
+- Reminder list 不要太密；每個 item 至少 44px 高。
+- AI suggestion 放在上方，但不要壓過提醒清單。
 
 ---
 
 ## Stitch Prompt Summary
-
-Generate the module-level flows for AI Life Assistant. Keep these separate from Home and Dashboard. Include three modules: Tomorrow Briefing, Smart Home Control, and AI Life Reminder. Each module should have clear internal sections, calm AI assistance, soft smart-home visual style, and low-pressure reminder language. Avoid sci-fi dashboard, neon, complex 3D, and stressful warning-heavy UI.
+Generate module-level screens one at a time in existing Stitch project `8270097307517936032`. Use Light Mode first with softened Atmospheric Glassmorphism and the existing app shell. Keep Dark Mode for the next Nocturnal Clarity pass. Include only three formal modules: Tomorrow Briefing, Smart Home Control, and AI Life Reminder. Avoid full SaaS, full calendar, full smart home platform, health platform, medical system, automation builder, neon, sci-fi, and heavy black UI.

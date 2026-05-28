@@ -17,7 +17,7 @@ The project should look and feel like a formal product, but the implemented demo
 - The three core modules should each have a complete and understandable demo flow.
 - The demo should support Desktop, Tablet, and Mobile screen generation.
 - The product should have coherent navigation, design system, mock data, and AI behavior.
-- Other future modules may appear as Coming Soon cards only.
+- Other future modules may appear only inside Module Library as Coming Soon previews, not directly as Home cards.
 
 ### What it does not mean
 - It is not a full commercial smart home platform.
@@ -57,11 +57,11 @@ Home should include:
 - AI Chat Entry
 - Dashboard Summary
 - Three formal module cards
-- Coming Soon module cards
+- Low-key More Modules entry
 - Mobile bottom navigation
 
 ## Coming Soon Policy
-Coming Soon modules may appear as preview or disabled cards only. They should not receive full detail pages, full flows, or complete feature specs in this demo scope.
+Coming Soon modules may appear as preview or disabled cards only inside Module Library / More Modules. They should not appear directly as Home cards and should not receive full detail pages, full flows, or complete feature specs in this demo scope.
 
 Examples:
 - Health Monitor
@@ -86,10 +86,10 @@ The demo should support:
 Mobile bottom navigation is fixed:
 
 ```txt
-Home / AI Assistant / Smart Home / Reminder
+Home / Devices / Tasks / Settings
 ```
 
-Settings is not part of the mobile bottom navigation.
+Ask AI is independent floating entry and is not part of the bottom navigation. Settings is the fourth item in the mobile bottom function bar.
 
 ## Stitch / Cursor / Codex Usage Notes
 - Use this file as the scope boundary before generating screens or implementation tasks.

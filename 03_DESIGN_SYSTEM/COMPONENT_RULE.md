@@ -7,7 +7,7 @@
 - Card：圓角 20–28px，soft glass background，細邊框。
 - Device Card：包含 icon、設備名稱、房間、狀態、主要 toggle。
 - Module Card：首頁入口，顯示模組名稱、短描述、狀態摘要。
-- Bottom Navigation：Mobile 固定四項 Home / AI Assistant / Smart Home / Reminder。
+- Bottom Navigation：Mobile 固定四項 Home / Devices / Tasks / Settings。
 - Reminder Item：標題、時間、優先程度、完成狀態。
 
 ## UX 規則

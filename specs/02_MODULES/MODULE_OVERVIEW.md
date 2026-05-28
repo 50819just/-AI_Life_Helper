@@ -37,7 +37,7 @@ AI Life Assistant
 │   ├── Tomorrow Briefing card
 │   ├── Smart Home Control card
 │   ├── AI Life Reminder card
-│   └── Coming Soon cards
+│   └── 更多模組 → Module Library / Coming Soon previews
 │
 ├── Tomorrow Briefing
 │
@@ -49,7 +49,7 @@ AI Life Assistant
 ```
 
 ## Coming Soon Modules
-The following modules may appear only as disabled / preview cards:
+The following modules may appear only as disabled / preview cards inside Module Library / More Modules, not directly on Home:
 - Health Monitor
 - Family Space
 - Car Mode
@@ -65,8 +65,8 @@ They should not be generated as full pages or flows.
 | Coming Soon | No | Preview card only |
 
 ## Mobile / RWD Behavior
-- Home shows formal module cards and Coming Soon previews.
-- Mobile bottom navigation uses Home / AI Assistant / Smart Home / Reminder.
+- Home shows only the three formal module cards plus a low-key `更多模組 →` entry. Coming Soon previews appear only inside Module Library / More Modules.
+- Mobile bottom navigation uses Home / Devices / Tasks / Settings.
 - Scenario screens inherit parent module navigation state.
 
 ## Stitch / Cursor / Codex Usage Notes
@@ -75,4 +75,4 @@ They should not be generated as full pages or flows.
 - Codex should preserve hierarchy and avoid scope expansion.
 
 ## Stitch MCP Description
-Use this module hierarchy for AI Life Assistant. Generate only three formal demo modules: Tomorrow Briefing, Smart Home Control, and AI Life Reminder. Treat Sleep Environment and Personal Reminders as child scenarios. Coming Soon modules should appear only as disabled or preview cards.
+Use this module hierarchy for AI Life Assistant. Generate only three formal demo modules: Tomorrow Briefing, Smart Home Control, and AI Life Reminder. Treat Sleep Environment and Personal Reminders as child scenarios. Coming Soon modules should appear only as disabled or preview cards inside Module Library / More Modules, not directly on Home.

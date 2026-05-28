@@ -33,7 +33,7 @@ Home shows:
 - Tomorrow Briefing card
 - Smart Home Control card
 - AI Life Reminder card
-- Coming Soon cards
+- 低調「更多模組 →」入口（Coming Soon previews 只在 Module Library 內）
 
 AI greeting example:
 

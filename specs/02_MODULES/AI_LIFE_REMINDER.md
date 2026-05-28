@@ -195,3 +195,12 @@ When generating this module:
 
 ## Stitch MCP Description
 Create an AI Life Reminder demo module for AI Life Assistant. Show today reminders, bedtime reminders, drink water reminder, no movement reminder, schedule reminder, personal checklist, AI suggestion, completed state, and missed reminder recovery. Keep the tone calm, low-pressure, and lifestyle-oriented. Do not generate a full health platform or strict todo app.
+
+## Visual / Mobile Implementation Lock
+
+- Light Mode uses softened Atmospheric Glassmorphism: warm white, pale mint, soft teal, soft blue, lavender / blue shadow.
+- Do not use pure black, large dead-black surfaces, black sidebar, black reminder cards, or high-saturation green.
+- Dark Mode uses the stable Nocturnal Clarity system in the next UI pass; do not mix dark tokens into Light Mode.
+- Mobile order: title → AI suggestion → today reminders → bedtime reminder → personal checklist → status summary.
+- Complete / snooze / pause controls need clear separation to prevent accidental taps.
+- Bottom nav active context: Tasks.

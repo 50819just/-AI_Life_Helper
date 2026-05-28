@@ -1,12 +1,12 @@
 # SETTINGS
 
 ## 文件用途
-定義 Settings 作為次級頁面的內容範圍，並確認不放入 Mobile Bottom Navigation。
+定義 Settings 的內容範圍，並確認 Settings 是 mobile bottom function bar 第四項；desktop 可放 sidebar bottom utility 或 profile menu。
 
 ## 初版規格
-- 入口：Home 右上角、Profile、更多選單。
+- 入口：Mobile bottom nav 第四項、desktop sidebar bottom utility、Home 右上角、Profile、更多選單。
 - 內容：帳號、主題模式、通知偏好、智慧設備連線、AI 偏好。
-- 不屬於 Bottom Nav 核心四項。
+- Mobile 中屬於 Bottom Nav 核心四項之一；desktop 中不是 primary nav。
 
 ## UX 規則
 - Settings 不應干擾日常快速任務。
@@ -19,7 +19,7 @@
 - Mobile 使用列表與分段頁。
 
 ## Stitch MCP 可理解描述
-Settings screen is secondary, not in mobile bottom navigation. Include theme, notification, account, device connection, AI preferences.
+Settings screen is the fourth mobile bottom navigation item and a desktop sidebar bottom utility entry. Include theme, notification, account, device connection, language, and AI preferences.
 
 ## i18n / Language Setting
 - Settings 需包含 Language / 語言設定區塊。

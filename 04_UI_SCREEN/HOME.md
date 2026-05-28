@@ -6,13 +6,21 @@
 ## 初版規格
 首頁包含以下 5 個主要區塊：
 
+0. Header / Nav
+   - 詳細規則集中在 `specs/01_CORE/APP_SHELL/`。
+   - Home 只引用 app shell 規則，不在本檔重複定義。
+
 1. AI Greeting
    - 顯示溫和問候，例如「早安，今天有 3 件事需要留意」。
    - 可附一行 AI 生活摘要。
+   - 可加入時間 / 天氣 / 今日情境，例如「09:30 · 晴朗 · 今天適合先整理三件事」。
 
 2. Module List
-   - 顯示 AI Assistant、Smart Home、Reminder 等主要模組入口。
+   - 顯示三個常用模組與一顆低調的「更多模組 →」入口。
+   - 常用模組只放 Tomorrow Briefing / 明日簡報、Smart Home Control / 智慧家庭控制、AI Life Reminder / AI 生活提醒。
    - Mobile Bottom Nav 已有入口時，首頁 Module List 可作為摘要卡片，而非重複導覽。
+   - 更多模組入口指向 Module Library / More Modules，不直接替 Coming Soon 模組生成完整頁。
+   - 不要在 Home 展開 Coming Soon card grid。
 
 3. Today Summary
    - 顯示今日行程、提醒、家庭狀態重點。
@@ -27,17 +35,55 @@
    - 顯示今日最接近或最重要的 3 筆提醒。
    - 提供進入 Reminder 頁面的入口。
 
+6. Footer（選配）
+   - 詳細規則集中在 `specs/01_CORE/APP_SHELL/FOOTER.md`。
+   - 若畫面已經很長，Footer 可省略或保持極輕量。
+
 ## UX 規則
 - 首頁優先讓使用者安心知道「今天狀況」與「家中設備狀態」。
 - AI Greeting 不要過度擬人或冗長，保持生活助理感。
+- Home 是產品首頁 / 入口 / 導覽中心；Dashboard Summary 是 Home 內的狀態摘要區塊，不預設作為獨立主導航頁。
+- AI Chat button / Ask AI 入口可以出現在 Home，但不要壓過三個正式 demo modules。
+- Home 中央可使用 AI Chat input / Ask AI input 作為主要互動入口；輸入框可參考 workspace hub reference，底部帶柔和綠色 accent / glow，但不要變成聊天頁本身。
+- 主畫面結構可加入時間、天氣、今日節奏、schedule overview、quick actions，使 Home 更像生活工作台，但仍保持摘要層級。
+- 常用模組可以直接進入正式 demo flow；更多模組只進入 Module Library / More Modules。
+- Coming Soon 模組只做 preview / disabled card，不生成完整 detail page。
+- Header / nav / footer 的詳細規則以 `specs/01_CORE/APP_SHELL/` 為準。
 - Smart Home Quick Control 的狀態回饋要即時、清楚、低干擾。
 - 夜間模式下，避免大面積白色、亮黃或強光暈。
-- Setting 不出現在 Mobile Bottom Nav，可放右上角 icon。
+- Settings 是 Mobile Bottom Nav 第四項；desktop 可放 sidebar bottom utility 或 profile menu。
 
 ## Responsive 規則
 - Desktop 1440px：建議 12 欄 grid；AI Greeting 橫跨上方；Today Summary 與 Smart Home Quick Control 並排；Reminder Preview 可放右側或下方。
 - Tablet 1024px：建議 2 欄；Greeting 置頂；Summary 與 Quick Control 分列；Reminder Preview 下移。
-- Mobile 375px：單欄；順序為 AI Greeting > Today Summary > Smart Home Quick Control > Reminder Preview > Module List；底部固定 Bottom Navigation。
+- Mobile 375px：單欄；順序為 AI Greeting > Ask AI floating entry > Today Summary > Smart Home Quick Control > Reminder Preview > Module List > 更多模組 →；底部固定 function bar 為 Home / Devices / Tasks / Settings，AI Chat / Ask AI 使用獨立 floating button。
+
+## 中文版 Home 結構
+
+```txt
+Home / 首頁
+├─ Header / Nav
+│  └─ See specs/01_CORE/APP_SHELL/
+├─ AI Greeting / AI 問候
+│  └─ 例如：Hi Darius，今天過得還好嗎？09:30 · 晴朗
+├─ Ask AI / AI Chat Entry
+│  └─ Desktop 可在中央作為輸入框；底部可有柔和綠色 accent / glow；Mobile 使用獨立 floating button
+├─ Dashboard Summary / 狀態摘要
+│  ├─ 今日提醒
+│  ├─ 明日準備
+│  └─ 智慧家庭狀態
+├─ 常用模組
+│  ├─ 明日簡報
+│  ├─ 智慧家庭控制
+│  └─ AI 生活提醒
+└─ 更多模組
+   └─ Module Library / More Modules
+      ├─ 已開放模組
+      └─ Coming Soon preview cards（只在 Module Library 內）
+└─ Footer（選配；See specs/01_CORE/APP_SHELL/FOOTER.md）
+```
+
+更多模組不直接代表完整功能頁。若點擊 Health Monitor、Family Space、Car Mode、AI Mood Analysis 等未開放模組，應顯示 Coming Soon / preview 狀態，而不是完整產品頁。
 
 ## Stitch MCP 可理解描述
-Create a responsive Home screen for AI Life Assistant. The design is Apple Home inspired with soft glassmorphism, calm technology, high readability, light and dark mode. Include AI greeting, module list, today summary, smart home quick controls, and reminder preview. Mobile uses bottom navigation with Home, AI Assistant, Smart Home, Reminder only. Settings is not in bottom nav.
+Create a responsive Light Mode Home screen for AI Life Assistant in existing Stitch project 8270097307517936032. Use Atmospheric Glassmorphism Light Mode with warm white, pale mint, soft teal, soft blue, lavender / blue shadow, and restrained obsidian text. Include Hi Darius greeting, time/weather context, Ask AI command bar, today summary, quick status, exactly three formal module cards, and a low-key `更多模組 →` entry below the cards. Desktop uses a left sidebar with `New Chat` as the first action and a solid `亮色模式` pill button. Mobile uses bottom navigation `Home / Devices / Tasks / Settings`; Ask AI is an independent floating entry. Do not show Coming Soon cards directly on Home.

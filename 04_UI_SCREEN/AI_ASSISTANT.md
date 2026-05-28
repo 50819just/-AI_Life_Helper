@@ -16,7 +16,13 @@
 ## Responsive 規則
 - Desktop：Conversation + Context Panel。
 - Tablet：Context Panel 可摺疊。
-- Mobile：輸入列固定底部但需高於 Bottom Nav。
+- Mobile：Ask AI 由 floating entry 進入；聊天輸入列固定底部但需高於 Bottom Nav 與 safe area。
 
 ## Stitch MCP 可理解描述
 AI Assistant screen with calm chat UI, suggested action chips, context cards for reminders and smart home devices, soft glass surfaces, non-sci-fi style.
+
+
+## Visual Rules
+- Light Mode 使用 softened Atmospheric Glassmorphism，避免純黑與大面積死黑。
+- Dark Mode 明天使用 stable Nocturnal Clarity system。
+- `New Chat` 與 `Ask AI` 固定英文；其他介面文字以繁體中文為主。
