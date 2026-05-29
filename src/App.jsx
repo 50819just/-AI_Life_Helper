@@ -1,53 +1,86 @@
 import { useEffect, useMemo, useState } from 'react'
 import './App.css'
 
-const coreModules = [
+const summaryCards = [
   {
-    id: 'briefing',
+    title: 'Environment',
+    value: '30%',
+    caption: 'Humidity',
+    icon: 'water_drop',
+    accent: 'secondary',
+  },
+  {
+    title: 'Sleep Analysis',
+    value: '7.5',
+    caption: 'hrs',
+    note: '優質 +12%',
+    icon: 'bedtime',
+    accent: 'sleep',
+  },
+  {
+    title: 'Quick Actions',
+    value: '3',
+    caption: '個常用動作',
+    actions: ['設定明日鬧鐘', '關閉臥室燈', '開啟專注模式'],
+    icon: 'bolt',
+    accent: 'actions',
+  },
+]
+
+const modules = [
+  {
     title: '明日簡報',
-    subtitle: '睡前把明天整理好',
-    description:
-      '先看第一個重要行程，再決定起床時間、鬧鐘與準備清單，讓你可以安心休息。',
-    chip: '今晚可完成',
-    meta: '明天 09:00 有重要行程',
+    icon: 'calendar_month',
+    entries: [
+      { time: '10:00', title: 'Design Sync', sub: 'Product Team' },
+      { time: '14:30', title: 'AI Model Review', sub: 'Tech Hub' },
+    ],
+    insight: '明天行程緊湊，建議今晚提前整理簡報資料。',
   },
   {
-    id: 'home',
     title: '智慧家庭控制',
-    subtitle: '快速切換燈光與情境',
-    description:
-      '調整亮度、色溫與簡單場景，夜間使用保持安靜、低亮度、好操作。',
-    chip: '睡前模式',
-    meta: '客廳 · 臥室 · 書桌',
+    icon: 'home_iot_device',
+    controls: [
+      { label: '客廳燈光', state: 'on' },
+      { label: '空調', state: '24°C' },
+    ],
+    insight: '正在監測中：目前溫度 24.5°C',
   },
   {
-    id: 'reminder',
     title: 'AI 生活提醒',
-    subtitle: '溫柔提醒今天節奏',
-    description:
-      '喝水、久坐、行程與睡前提醒都在這裡，完成、錯過、暫停狀態一眼看懂。',
-    chip: '3 個待完成',
-    meta: '今天 / 睡前 / 行程',
+    icon: 'notifications_active',
+    reminders: [
+      { label: '補充水份 1200ml / 2000ml', state: 'progress', progress: 60 },
+      { label: '攝取維他命 B 群', state: 'done' },
+      { label: '久坐提醒：起來伸展一下', state: 'pending' },
+    ],
+    insight: '今日完成度 33%',
   },
+]
+
+const comingSoon = [
+  { title: '健康監測', icon: 'health_metrics' },
+  { title: '家庭空間', icon: 'nest_multi_room' },
+  { title: '車載模式', icon: 'directions_car' },
+  { title: '情緒分析', icon: 'mood' },
 ]
 
 function getInitialTheme() {
   if (typeof window === 'undefined') return 'light'
-  const saved = window.localStorage.getItem('a-life-theme')
-  return saved === 'dark' ? 'dark' : 'light'
+  return window.localStorage.getItem('a-life-theme') || 'light'
 }
 
 function App() {
   const [theme, setTheme] = useState(getInitialTheme)
 
   useEffect(() => {
-    document.documentElement.dataset.theme = theme
+    document.documentElement.className = theme
     window.localStorage.setItem('a-life-theme', theme)
   }, [theme])
 
   const isDark = theme === 'dark'
 
-  const greetingTime = useMemo(() => {
+  const headerMeta = useMemo(() => {
     const now = new Date()
     const time = now
       .toLocaleTimeString('zh-TW', {
@@ -56,198 +89,240 @@ function App() {
         hour12: false,
       })
       .replace(/^0/, '')
-    return `${time} · ${isDark ? '夜深了' : '晴朗'} · ${
-      isDark ? '適合慢慢收尾今天的節奏' : '今天適合先整理三件事'
-    }`
+    return `${time} · ${isDark ? '夜深了' : '晴朗'} · 今天適合先整理三件事`
   }, [isDark])
 
-  const themeLabel = isDark ? '深色模式' : '亮色模式'
-
   return (
-    <div className="app-shell">
-      <aside className="sidebar glass-panel">
+    <div className="shell">
+      <aside className="sidebar glass">
         <div className="brand">
-          <div className="brand-badge">AI</div>
+          <div className="brand-icon">AI</div>
           <div>
-            <p className="eyebrow">AI Life Assistant</p>
-            <h1>AI 生活小幫手</h1>
+            <p className="brand-kicker">AI LIFE ASSISTANT</p>
+            <h1>AI生活小幫手</h1>
           </div>
         </div>
 
-        <button className="primary-pill" type="button">
-          <span className="pill-icon">＋</span>
-          New Chat
+        <button className="new-chat" type="button">
+          <span className="material">＋</span>
+          <span>New Chat</span>
         </button>
 
-        <nav className="sidebar-nav" aria-label="Desktop navigation">
-          <a className="nav-item active" href="#home">
-            <span>⌂</span>
+        <nav className="side-nav" aria-label="Desktop navigation">
+          <a className="side-link active" href="#home">
+            <span className="material">home</span>
             <span>首頁</span>
           </a>
-          <a className="nav-item" href="#ask-ai">
-            <span>✦</span>
+          <a className="side-link" href="#ask-ai">
+            <span className="material">chat_bubble</span>
             <span>Ask AI</span>
           </a>
-          <a className="nav-item" href="#home-control">
-            <span>☾</span>
+          <a className="side-link" href="#home-control">
+            <span className="material">home_iot_device</span>
             <span>智慧家庭</span>
           </a>
-          <a className="nav-item" href="#reminders">
-            <span>◌</span>
+          <a className="side-link" href="#reminders">
+            <span className="material">notifications</span>
             <span>生活提醒</span>
+          </a>
+          <a className="side-link" href="#settings">
+            <span className="material">settings</span>
+            <span>設定</span>
           </a>
         </nav>
 
-        <div className="sidebar-footer">
-          <button
-            className="mode-pill"
-            type="button"
-            onClick={() => setTheme(isDark ? 'light' : 'dark')}
-          >
-            <span>{isDark ? '☼' : '☾'}</span>
-            {themeLabel}
+        <div className="side-footer">
+          <button className="mode-pill" type="button" onClick={() => setTheme(isDark ? 'light' : 'dark')}>
+            <span className="material">light_mode</span>
+            <span>{isDark ? '深色模式' : '亮色模式'}</span>
           </button>
 
-          <div className="sidebar-links">
-            <button type="button">設定</button>
-            <button type="button">說明</button>
-            <button type="button">帳號 / 登出</button>
+          <div className="utility-links">
+            <a href="#help">
+              <span className="material">help</span>
+              <span>說明</span>
+            </a>
+            <a href="#account">
+              <span className="material">logout</span>
+              <span>帳號 / 登出</span>
+            </a>
           </div>
         </div>
       </aside>
 
-      <main className="main">
-        <header className="topbar glass-panel">
-          <div className="topbar-left">
-            <div>
-              <p className="eyebrow">Home / Dashboard</p>
+      <main className="content">
+        <div className="content-inner">
+          <header className="header">
+            <div className="headline">
+              <p className="page-kicker">HOME / 首頁</p>
               <h2>Hi Darius，今天過得還好嗎？</h2>
             </div>
-            <p className="topbar-subtitle">{greetingTime}</p>
-          </div>
 
-          <div className="topbar-actions">
-            <button className="ghost-chip" type="button">
+            <button className="ask-pill" type="button">
               Ask AI
             </button>
-            <button className="mode-pill mobile-mode-pill" type="button" onClick={() => setTheme(isDark ? 'light' : 'dark')}>
-              <span>{isDark ? '☼' : '☾'}</span>
-              {themeLabel}
-            </button>
+          </header>
+
+          <div className="meta-row">
+            <span className="material small">schedule</span>
+            <span>09:30</span>
+            <span>·</span>
+            <span className="material small">light_mode</span>
+            <span>晴朗</span>
+            <span>·</span>
+            <span className="meta-chip">今天適合先整理三件事</span>
           </div>
-        </header>
 
-        <section className="hero glass-panel" id="home">
-          <div className="hero-copy">
-            <p className="eyebrow">今日節奏</p>
-            <h3>先把明天和家裡的節奏整理好，再慢慢收心。</h3>
-            <p>
-              姊姊幫你把今天最重要的事情放在前面，首頁只保留可以一眼懂、也一眼能進去的入口。
-            </p>
-
-            <div className="hero-chips">
-              <span className="status-chip warm">09:30 · 晴朗</span>
-              <span className="status-chip calm">今天適合先整理三件事</span>
-            </div>
-
-            <div className="ask-bar" id="ask-ai">
-              <div className="ask-bar-icon">✦</div>
-              <div className="ask-bar-copy">
-                <strong>Ask AI</strong>
-                <span>問問今天要先處理什麼</span>
+          <section className="ask-section glass">
+            <div className="ask-card" id="ask-ai">
+              <div className="ask-glow" />
+              <div className="ask-input-shell">
+                <span className="material ask-icon">auto_awesome</span>
+                <input type="text" placeholder="Ask AI" aria-label="Ask AI" />
+                <button type="button" className="ask-submit">
+                  <span className="material">arrow_upward</span>
+                </button>
               </div>
-              <button type="button" className="ask-button">
-                開始
+            </div>
+
+            <p className="ask-hint">行程、提醒、家中設備或明日準備，都可以直接問我。</p>
+
+            <div className="query-chips">
+              <button type="button">個人</button>
+              <button type="button" className="active">
+                家庭
               </button>
+              <button type="button">工作</button>
             </div>
-          </div>
+          </section>
 
-          <div className="hero-summary">
-            <article className="summary-card glass-card">
-              <p>明日準備</p>
-              <strong>82%</strong>
-              <span>還有 2 件事確認完就能放心休息</span>
-            </article>
-            <article className="summary-card glass-card">
-              <p>智慧家庭</p>
-              <strong>3 台設備</strong>
-              <span>臥室與客廳燈光都可快速調整</span>
-            </article>
-            <article className="summary-card glass-card">
-              <p>今日提醒</p>
-              <strong>4 筆</strong>
-              <span>含睡前、喝水與久坐提醒</span>
-            </article>
-          </div>
-        </section>
-
-        <section className="section">
-          <div className="section-head">
-            <div>
-              <p className="eyebrow">常用模組</p>
-              <h3>三個正式 demo modules</h3>
-            </div>
-            <span className="section-note">完整流程會在各自 detail page 展開</span>
-          </div>
-
-          <div className="module-grid">
-            {coreModules.map((module) => (
-              <article key={module.id} className="module-card glass-card" id={module.id}>
-                <div className="module-top">
+          <section className="summary-grid">
+            {summaryCards.map((card) => (
+              <article key={card.title} className="summary glass">
+                <div className="summary-head">
                   <div>
-                    <p className="module-chip">{module.chip}</p>
-                    <h4>{module.title}</h4>
-                    <p className="module-subtitle">{module.subtitle}</p>
+                    <p className="summary-kicker">{card.title}</p>
+                    <div className="summary-value-row">
+                      <strong>{card.value}</strong>
+                      <span>{card.caption}</span>
+                    </div>
+                    {card.note ? <p className="summary-note">{card.note}</p> : null}
                   </div>
-                  <span className="module-meta">{module.meta}</span>
+                  <div className={`summary-icon ${card.accent}`}>
+                    <span className="material">{card.icon}</span>
+                  </div>
                 </div>
 
-                <p className="module-description">{module.description}</p>
+                {card.actions ? (
+                  <div className="quick-actions">
+                    {card.actions.map((action) => (
+                      <button key={action} type="button">
+                        <span className="material small">arrow_right</span>
+                        {action}
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
+              </article>
+            ))}
+          </section>
 
-                <div className="module-actions">
-                  <button className="primary-action" type="button">
-                    進入
-                  </button>
-                  <button className="secondary-action" type="button">
-                    預覽
-                  </button>
+          <div className="modules-header">
+            <h3>常用模組</h3>
+            <button type="button" className="edit-link">
+              編輯 <span className="material small">edit</span>
+            </button>
+          </div>
+
+          <section className="module-grid">
+            {modules.map((module) => (
+              <article key={module.title} className="module glass">
+                <div className="module-top">
+                  <div className="module-icon">
+                    <span className="material">{module.icon}</span>
+                  </div>
+                  <h4>{module.title}</h4>
+                </div>
+
+                {'entries' in module ? (
+                  <div className="module-body stack-list">
+                    {module.entries.map((entry) => (
+                      <div key={entry.title} className="stack-row">
+                        <div className="stack-time">{entry.time}</div>
+                        <div>
+                          <strong>{entry.title}</strong>
+                          <p>{entry.sub}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+
+                {'controls' in module ? (
+                  <div className="module-body control-list">
+                    {module.controls.map((control) => (
+                      <button key={control.label} type="button" className="control-row">
+                        <span>
+                          <span className="material small">{control.label.includes('燈') ? 'lightbulb' : 'ac_unit'}</span>
+                          {control.label}
+                        </span>
+                        <span className={`control-pill ${control.state === 'on' ? 'on' : 'off'}`}>{control.state}</span>
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
+
+                {'reminders' in module ? (
+                  <div className="module-body reminder-list">
+                    {module.reminders.map((reminder) => (
+                      <div key={reminder.label} className={`reminder-row ${reminder.state}`}>
+                        <div className="reminder-mark">
+                          {reminder.state === 'done' ? <span className="material small">check</span> : null}
+                        </div>
+                        <div className="reminder-copy">
+                          <p>{reminder.label}</p>
+                          {reminder.state === 'progress' ? (
+                            <div className="progress">
+                              <span style={{ width: `${reminder.progress}%` }} />
+                            </div>
+                          ) : null}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+
+                <div className="module-foot">
+                  <div className="insight">
+                    {module.title === 'AI 生活提醒' ? (
+                      <span className="insight-accent">{module.insight}</span>
+                    ) : (
+                      <p>{module.insight}</p>
+                    )}
+                  </div>
                 </div>
               </article>
             ))}
+          </section>
+
+          <div className="more-header">
+            <h3>更多模組</h3>
           </div>
 
-          <div className="more-modules">
-            <button type="button" className="more-button">
-              更多模組 →
-            </button>
-          </div>
-        </section>
+          <section className="coming-grid">
+            {comingSoon.map((item) => (
+              <article key={item.title} className="coming glass">
+                <span className="material">{item.icon}</span>
+                <p>{item.title}</p>
+              </article>
+            ))}
+          </section>
 
+          <footer className="footer">
+            <p>AI 生活小幫手 · Lumina OS v1.0</p>
+          </footer>
+        </div>
       </main>
-
-      <button className="floating-ask-ai" type="button">
-        <span className="floating-ask-ai__icon">✦</span>
-        Ask AI
-      </button>
-
-      <nav className="mobile-nav glass-panel" aria-label="Mobile navigation">
-        <button className="mobile-nav-item active" type="button">
-          <span>⌂</span>
-          <span>Home</span>
-        </button>
-        <button className="mobile-nav-item" type="button">
-          <span>◌</span>
-          <span>Devices</span>
-        </button>
-        <button className="mobile-nav-item" type="button">
-          <span>☾</span>
-          <span>Tasks</span>
-        </button>
-        <button className="mobile-nav-item" type="button">
-          <span>⚙</span>
-          <span>Settings</span>
-        </button>
-      </nav>
     </div>
   )
 }
