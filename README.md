@@ -36,10 +36,10 @@ NestBuddy 是一個結合 AI 助理、智慧家電控制、AI 提醒與行程管
 本專案使用 Vite，若部署到 GitHub Pages project site，production build 已在 `vite.config.js` 設定：
 
 ```js
-base: command === 'build' ? '/NestBuddy-AiLife/' : '/'
+base: command === 'build' ? '/-AI_Life_Helper/' : '/'
 ```
 
-注意：若 GitHub repo 名稱不是 `-AI_Life_Helper`，需要同步調整 `vite.config.js` 的 `base` 路徑。
+注意：目前 GitHub repo 名稱是 `-AI_Life_Helper`，所以 `vite.config.js` 的 `base` 路徑需維持 `/-AI_Life_Helper/`。若之後 repo 改名，這裡也要同步調整。
 
 建議部署流程：
 
@@ -47,4 +47,4 @@ base: command === 'build' ? '/NestBuddy-AiLife/' : '/'
 npm run build
 ```
 
-GitHub Pages 可使用 GitHub Actions 部署 `dist/`，或依後續 repo 設定調整。`public/.nojekyll` 會在 build 時輸出到 `dist/.nojekyll`，避免 Pages 使用 Jekyll 處理靜態檔。
+GitHub Pages 已加入 GitHub Actions 部署流程：每次 push 到 `main` 會自動 build，並將 `dist/` 發佈到 Pages。`public/.nojekyll` 會在 build 時輸出到 `dist/.nojekyll`，避免 Pages 使用 Jekyll 處理靜態檔。
