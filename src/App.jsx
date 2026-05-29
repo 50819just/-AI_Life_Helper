@@ -31,21 +31,6 @@ const coreModules = [
   },
 ]
 
-const comingSoon = ['健康監測', '家庭空間', '車載模式', '情緒分析']
-
-const deviceCards = [
-  { name: '客廳主燈', room: '客廳', state: '開啟 · 65% · 3200K' },
-  { name: '臥室燈', room: '臥室', state: '開啟 · 35% · 2700K' },
-  { name: '書桌燈', room: '書房', state: '關閉' },
-]
-
-const reminderCards = [
-  { time: '10:30', text: '喝水提醒', state: 'completed' },
-  { time: '13:00', text: '午餐後散步', state: 'missed' },
-  { time: '15:30', text: '久未移動提醒', state: 'upcoming' },
-  { time: '22:30', text: '睡前整理提醒', state: 'upcoming' },
-]
-
 function getInitialTheme() {
   if (typeof window === 'undefined') return 'light'
   const saved = window.localStorage.getItem('a-life-theme')
@@ -238,113 +223,6 @@ function App() {
           </div>
         </section>
 
-        <section className="section split-layout">
-          <article className="panel glass-panel">
-            <div className="section-head compact">
-              <div>
-                <p className="eyebrow">智慧家庭控制</p>
-                <h3>快速狀態與控制</h3>
-              </div>
-              <span className="section-note">Desktop / Tablet 皆可清楚操作</span>
-            </div>
-
-            <div className="device-grid" id="home-control">
-              {deviceCards.map((device) => (
-                <div className="device-card glass-card" key={device.name}>
-                  <div>
-                    <h4>{device.name}</h4>
-                    <p>{device.room}</p>
-                  </div>
-                  <strong>{device.state}</strong>
-                </div>
-              ))}
-            </div>
-
-            <div className="control-stack">
-              <div className="control-row">
-                <span>亮度</span>
-                <div className="slider-track">
-                  <span className="slider-fill" style={{ width: isDark ? '58%' : '72%' }} />
-                </div>
-                <span>{isDark ? '58%' : '72%'}</span>
-              </div>
-              <div className="control-row">
-                <span>色溫</span>
-                <div className="slider-track">
-                  <span className="slider-fill warm" style={{ width: isDark ? '45%' : '61%' }} />
-                </div>
-                <span>{isDark ? '偏暖' : '柔暖'}</span>
-              </div>
-            </div>
-
-            <div className="scene-chips">
-              {['專注', '放鬆', '睡前', '全部關燈'].map((scene) => (
-                <button key={scene} className="scene-chip" type="button">
-                  {scene}
-                </button>
-              ))}
-            </div>
-          </article>
-
-          <article className="panel glass-panel" id="reminders">
-            <div className="section-head compact">
-              <div>
-                <p className="eyebrow">AI 生活提醒</p>
-                <h3>今天的提醒狀態</h3>
-              </div>
-              <span className="section-note">Completed / Missed / Upcoming / Paused</span>
-            </div>
-
-            <div className="reminder-list">
-              {reminderCards.map((item) => (
-                <div key={`${item.time}-${item.text}`} className={`reminder-item glass-card ${item.state}`}>
-                  <div className="reminder-time">{item.time}</div>
-                  <div className="reminder-copy">
-                    <strong>{item.text}</strong>
-                    <span>
-                      {item.state === 'completed' && '已完成'}
-                      {item.state === 'missed' && '可延後或補完成'}
-                      {item.state === 'upcoming' && '即將提醒'}
-                      {item.state === 'paused' && '已暫停'}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="bedtime-card glass-card">
-              <p className="eyebrow">睡前提醒</p>
-              <h4>收拾桌面、充電、確認明日行程</h4>
-              <p>完成後就可以放心休息。姊姊已經幫你把明天最重要的事排好了。</p>
-            </div>
-
-            <div className="checklist">
-              {['水壺', '鑰匙', '筆電', '文件'].map((item) => (
-                <label key={item} className="checklist-item glass-card">
-                  <input type="checkbox" defaultChecked={item === '筆電'} />
-                  <span>{item}</span>
-                </label>
-              ))}
-            </div>
-          </article>
-        </section>
-
-        <section className="section coming-soon glass-panel">
-          <div className="section-head compact">
-            <div>
-              <p className="eyebrow">更多模組</p>
-              <h3>預覽但不展開</h3>
-            </div>
-            <span className="section-note">只透過 Module Library 進入</span>
-          </div>
-          <div className="coming-grid">
-            {comingSoon.map((item) => (
-              <span key={item} className="coming-pill">
-                {item}
-              </span>
-            ))}
-          </div>
-        </section>
       </main>
 
       <button className="floating-ask-ai" type="button">

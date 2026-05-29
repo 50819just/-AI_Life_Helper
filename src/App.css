@@ -181,6 +181,9 @@
   gap: 18px;
   align-content: start;
   min-width: 0;
+  max-width: 1360px;
+  width: 100%;
+  justify-self: center;
 }
 
 .topbar,
@@ -610,28 +613,6 @@
   width: 18px;
   height: 18px;
   accent-color: var(--cta-bg);
-}
-
-.coming-soon {
-  display: grid;
-  gap: 16px;
-}
-
-.coming-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.coming-pill {
-  min-height: 40px;
-  border-radius: 999px;
-  padding: 0 14px;
-  display: inline-flex;
-  align-items: center;
-  border: 1px dashed var(--border);
-  color: var(--text);
-  background: var(--soft-pink);
 }
 
 .floating-ask-ai {
