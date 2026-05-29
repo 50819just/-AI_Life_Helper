@@ -1,7 +1,7 @@
 # DESIGN_SYSTEM_RULES
 
 ## 文件用途
-此文件是 AI Life Assistant 的設計系統總規則，負責定義 Stitch preset 的使用方式、產品氣質限制、元件規則與 responsive 原則。
+此文件是 NestBuddy 的設計系統總規則，負責定義 Stitch preset 的使用方式、產品氣質限制、元件規則與 responsive 原則。
 
 本專案的視覺 token 以 Stitch preset 為主；此文件不再另外定義一套獨立色票，避免 Light / Dark mode token 互相干擾。
 
@@ -44,7 +44,7 @@
 
 ## Product Tone
 
-AI Life Assistant 的畫面氣質需保持：
+NestBuddy 的畫面氣質需保持：
 - 安定、日常、可靠
 - Calm smart home assistant
 - Apple Home inspired, but not copied

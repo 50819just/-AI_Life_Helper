@@ -1,7 +1,7 @@
 # ACCESSIBILITY_RULE
 
 ## 文件用途
-定義 AI Life Assistant 的可讀性、操作性、手機易用性、Light / Dark 舒適度與 i18n accessibility 基本規則。
+定義 NestBuddy 的可讀性、操作性、手機易用性、Light / Dark 舒適度與 i18n accessibility 基本規則。
 
 ## Core Accessibility Rules
 - 主要文字需達到足夠對比，但 Light Mode 不使用純黑作為大面積視覺元素。
@@ -41,7 +41,7 @@
 - Missed 不要呈現為責備，應提供延後、完成、忽略一次等恢復動作。
 
 ## Light / Dark Accessibility
-- Light UI：softened Atmospheric Glassmorphism，避免純黑、大面積死黑、黑色 sidebar、黑色卡片。
+- Light UI：softened Atmospheric Glassmorphism，並以現行藍色漸層 CTA、白字、白 icon 為主，避免純黑、大面積死黑、黑色 sidebar、黑色卡片。
 - Dark UI：使用 stable Nocturnal Clarity system，保持低亮度、可讀、低刺激。
 - Dark Mode 不等於 neon / cyberpunk；mint glow 必須克制。
 
@@ -53,4 +53,4 @@
 - i18n key 命名需語意清楚，避免使用畫面位置作為唯一命名依據。
 
 ## Stitch MCP 可理解描述
-Design accessible AI Life Assistant screens with readable slate text, clear labels, focus states, 44–48px touch targets, mobile safe-area spacing, visible bottom navigation labels, independent floating Ask AI, and clear device/reminder states. Light Mode avoids pure black and heavy black surfaces. Dark Mode uses the stable Nocturnal Clarity system with low-brightness comfort.
+Design accessible NestBuddy screens with readable slate text, clear labels, focus states, 44–48px touch targets, mobile safe-area spacing, visible bottom navigation labels, independent floating Ask AI, and clear device/reminder states. Light Mode avoids pure black and heavy black surfaces. Dark Mode uses the stable Nocturnal Clarity system with low-brightness comfort.

@@ -1,10 +1,10 @@
 # DEMO_SCOPE
 
 ## Document Purpose
-Define the product scope for AI Life Assistant / AI 生活小幫手 as a Product-like Demo Prototype. This file prevents the project from expanding into a full commercial product while keeping the demo polished enough to feel like a real product.
+Define the product scope for NestBuddy / 巢伴 as a Product-like Demo Prototype. This file prevents the project from expanding into a full commercial product while keeping the demo polished enough to feel like a real product.
 
 ## Scope
-AI Life Assistant is a lifestyle AI product demo that combines AI assistance, smart home control, reminders, and schedule preparation.
+NestBuddy is a lifestyle AI product demo that combines AI assistance, smart home control, reminders, and schedule preparation.
 
 The project should look and feel like a formal product, but the implemented demo scope is intentionally limited to three core demo modules.
 
@@ -14,6 +14,7 @@ The project should look and feel like a formal product, but the implemented demo
 
 ### What it means
 - The UI should feel like a real product dashboard.
+- In the current UI lock, Home and Dashboard are merged into one homepage entry.
 - The three core modules should each have a complete and understandable demo flow.
 - The demo should support Desktop, Tablet, and Mobile screen generation.
 - The product should have coherent navigation, design system, mock data, and AI behavior.
@@ -33,7 +34,7 @@ The project should look and feel like a formal product, but the implemented demo
 3. AI Life Reminder
 
 Each formal demo module needs:
-- A clear entry point from Home / Dashboard.
+- A clear entry point from Home / Dashboard（合併首頁）.
 - A defined user goal.
 - A short but complete demo flow.
 - AI suggestion or AI contextual support.
@@ -49,13 +50,13 @@ The following files are scenario-level specs, not standalone formal modules:
 | Sleep Environment | Smart Home Control | Demonstrates Sleep Mode, low-brightness night control, and AI-recommended lighting state. |
 | Personal Reminders | AI Life Reminder | Demonstrates personal checklist, bedtime reminders, and completion reassurance. |
 
-## Home / Dashboard Role
-Home / Dashboard is the formal product entry and demo navigation surface. It should show what the product can do without expanding every module detail on the same page.
+## Home / Dashboard（合併首頁） Role
+Home / Dashboard（合併首頁） is the formal product entry and demo navigation surface. It should show what the product can do without expanding every module detail on the same page.
 
 Home should include:
 - AI Greeting
 - AI Chat Entry
-- Dashboard Summary
+- Dashboard Summary（Home 內摘要區，現行首頁摘要卡）
 - Three formal module cards
 - Low-key More Modules entry
 - Mobile bottom navigation

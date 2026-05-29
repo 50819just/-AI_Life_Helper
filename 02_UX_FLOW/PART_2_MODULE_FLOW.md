@@ -1,7 +1,7 @@
 # PART 2 — Module Flow
 
 ## 文件用途
-把 AI Life Assistant 的三個核心模組拆成第二段流程，專門處理模組內部功能，不和 Home、Settings、Module Library 混在一起。
+把 NestBuddy 的三個核心模組拆成第二段流程，專門處理模組內部功能，不和 Home、Settings、Module Library 混在一起。
 
 ## Current Scope Lock
 

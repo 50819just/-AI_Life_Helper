@@ -26,7 +26,7 @@
 - 智慧燈光控制需要夜間低亮度版本。
 
 ## Flow 分段規則
-- PART 1：只處理 Splash、Home Dashboard、Dashboard Overview、AI Chat Center、Settings、Module Library。
+- PART 1：只處理 Splash、Home / Dashboard（合併首頁）、Ask AI / AI Chat Center、Settings、Module Library。
 - PART 2：只處理 Tomorrow Briefing、Smart Home Control、AI Life Reminder 三個模組內部流程。
 - 交給 Stitch 生成畫面時，不要一次把 PART 1 和 PART 2 全部塞進同一個 prompt，避免畫面資訊過載。
 
@@ -34,7 +34,7 @@
 - 每次生成至少考慮 Desktop 1440、Tablet 1024、Mobile 375。
 - Mobile Bottom Navigation 固定使用：Home、Devices、Tasks、Settings。
 - Ask AI 是獨立 floating button / floating input entry，不放進 bottom navigation。
-- Desktop 使用 left sidebar；第一個主要 action 固定為 `New Chat`。
+- Desktop 使用 left sidebar；第一個主要 action 固定為 `New Chat`，首頁入口現行為 `Dashboard`。
 - 不要讓 Stitch 自行混合 Dashboard / AI Chat / Notification 版本。
 
 ## Stitch MCP 可理解描述
@@ -108,7 +108,7 @@ Core question: 我現在可以安心睡了嗎？明天準備好了嗎？
 Desktop rules:
 - Keep the left sidebar app shell consistent with Home.
 - Sidebar first primary action is New Chat. Keep New Chat in English.
-- Keep Ask AI in English.
+- Keep Ask AI in English when it appears, but do not place it in the desktop sidebar primary nav.
 - Other interface copy should mainly use Traditional Chinese.
 - Sidebar bottom appearance control is a solid pill button labeled 亮色模式. Do not use a sliding toggle.
 

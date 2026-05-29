@@ -2,7 +2,7 @@
 
 ## 文件用途
 
-定義 AI Life Assistant 桌面版 Left Sidebar / App Shell 的結構與規則。
+定義 NestBuddy 桌面版 Left Sidebar / App Shell 的結構與規則。
 
 左側 Sidebar 是 desktop app shell 的核心導航框架，優先於 top nav 作為主要 desktop navigation reference。
 
@@ -21,7 +21,7 @@ AI Chat - Confirmation (Lumina Ambient Desktop Refined)
 - 第一個主要 action 是 New Chat
 - 中間是主要功能 nav list
 - 底部是 secondary utility / account 區
-- 底部可放 light / dark mode toggle
+- 底部保留亮色模式 pill，dark mode 先作為既有系統參考，不在這輪主畫面重做
 - icon + label 的清楚列表形式
 - 明亮、成熟、乾淨的 desktop product shell
 
@@ -32,13 +32,12 @@ AI Chat - Confirmation (Lumina Ambient Desktop Refined)
 ```txt
 Left Sidebar
 ├─ Brand Area
-│  ├─ AI 生活小幫手
+│  ├─ 巢伴
 │  └─ Premium Assistant / 生活助理
 ├─ Primary Action
 │  └─ New Chat
 ├─ Primary Navigation
-│  ├─ 首頁
-│  ├─ Ask AI
+│  ├─ Dashboard
 │  ├─ 智慧家庭
 │  └─ 生活提醒
 ├─ Secondary Navigation（選配）
@@ -69,13 +68,12 @@ New Chat 是 AI Assistant / AI Chat 的快速入口，不等於 Home，也不取
 Primary nav 應對齊本專案四個核心入口：
 
 ```txt
-首頁
-Ask AI
+Dashboard / Home
 智慧家庭
 生活提醒
 ```
 
-不要把 Dashboard、Notification、Settings 放成 primary nav。
+不要把 Ask AI、Notification、Settings 放成 primary nav。
 
 ### 3. Bottom Utility
 
@@ -84,13 +82,13 @@ Sidebar 最下方應放 utility / account 類操作。
 可包含：
 
 ```txt
-亮色模式 / 深色模式切換
+亮色模式
 設定
 說明
 帳號 / 登出
 ```
 
-其中 Light / Dark Mode Toggle 應靠近底部，作為全域外觀切換。亮色版中先顯示一顆實心 pill button：
+其中外觀控制在現行畫面只保留一顆實心 pill button：
 
 ```txt
 亮色模式
@@ -124,12 +122,11 @@ Library
 Explore
 ```
 
-在 AI Life Assistant demo prototype 中應對齊為：
+在 NestBuddy demo prototype 中應對齊為：
 
 ```txt
 New Chat
-首頁
-Ask AI
+Dashboard
 智慧家庭
 生活提醒
 歷史紀錄（選配）
@@ -146,7 +143,7 @@ Ask AI
 不要在 sidebar primary nav 放：
 
 ```txt
-Dashboard
+Ask AI
 Notification
 Health Monitor
 Family Space

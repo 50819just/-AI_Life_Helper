@@ -3,7 +3,7 @@
 ## 文件用途
 此文件已調整為 Stitch-first 色彩索引，不再作為獨立色票來源。
 
-AI Life Assistant 的 Light / Dark mode 色彩 token 以 Stitch preset 為主，避免專案自訂色票與 Stitch token 互相干擾。
+NestBuddy 的 Light / Dark mode 色彩 token 以 Stitch preset 為主，避免專案自訂色票與 Stitch token 互相干擾。
 
 ---
 
@@ -56,7 +56,7 @@ AI Life Assistant 的 Light / Dark mode 色彩 token 以 Stitch preset 為主，
 ---
 
 ## Stitch MCP 可理解描述
-Use Stitch presets as the primary color token source. Light Mode follows Atmospheric Glassmorphism. Dark Mode follows Nocturnal Clarity. Do not create a separate competing palette. Keep AI Life Assistant calm, readable, lifestyle-oriented, low-distraction, and comfortable for smart home night usage.
+Use Stitch presets as the primary color token source. Light Mode follows Atmospheric Glassmorphism. Dark Mode follows Nocturnal Clarity. Do not create a separate competing palette. Keep NestBuddy calm, readable, lifestyle-oriented, low-distraction, and comfortable for smart home night usage.
 
 ## Dark Mode Stability Lock
 

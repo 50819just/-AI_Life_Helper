@@ -1,13 +1,13 @@
 # Module Overview
 
 ## Document Purpose
-Define the module hierarchy for AI Life Assistant / AI 生活小幫手 as a Product-like Demo Prototype.
+Define the module hierarchy for NestBuddy / 巢伴 as a Product-like Demo Prototype.
 
 ## Scope
 This document clarifies which modules are formal demo modules, which files are scenario specs, and which modules should remain Coming Soon.
 
 ## Product-like Demo Prototype
-AI Life Assistant should feel like a formal lifestyle AI product, but the demo scope is limited.
+NestBuddy should feel like a formal lifestyle AI product, but the demo scope is limited.
 
 > 三個模組都要有完整 Demo flow，但不展開成完整商業產品功能。
 
@@ -23,7 +23,7 @@ These are the only three modules that should receive complete demo flows and ful
 
 | Scenario | Parent Module | Role |
 |---|---|---|
-| Sleep Environment | Smart Home Control | Demonstrates Sleep Mode and low-brightness smart home control |
+| Sleep Environment | Smart Home Control | Demonstrates Sleep Mode, low-brightness smart home control, and the current day/night switching behavior |
 | Personal Reminders | AI Life Reminder | Demonstrates bedtime checklist and personal reminder completion |
 
 Scenario specs cannot replace their parent modules.
@@ -31,9 +31,9 @@ Scenario specs cannot replace their parent modules.
 ## Module Relationship
 
 ```txt
-AI Life Assistant
+NestBuddy
 │
-├── Home / Dashboard
+├── Home / Dashboard（合併首頁）
 │   ├── Tomorrow Briefing card
 │   ├── Smart Home Control card
 │   ├── AI Life Reminder card
@@ -75,4 +75,4 @@ They should not be generated as full pages or flows.
 - Codex should preserve hierarchy and avoid scope expansion.
 
 ## Stitch MCP Description
-Use this module hierarchy for AI Life Assistant. Generate only three formal demo modules: Tomorrow Briefing, Smart Home Control, and AI Life Reminder. Treat Sleep Environment and Personal Reminders as child scenarios. Coming Soon modules should appear only as disabled or preview cards inside Module Library / More Modules, not directly on Home.
+Use this module hierarchy for NestBuddy. Generate only three formal demo modules: Tomorrow Briefing, Smart Home Control, and AI Life Reminder. Treat Sleep Environment and Personal Reminders as child scenarios. Coming Soon modules should appear only as disabled or preview cards inside Module Library / More Modules, not directly on Home.

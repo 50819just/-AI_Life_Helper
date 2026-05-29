@@ -4,7 +4,7 @@
 列出 MVP 需要優先支持的功能模組，幫助產品、設計與開發確認初版範圍。
 
 ## 初版規格
-- Home：AI Greeting、今日摘要、模組入口、智慧家庭快捷控制、提醒預覽。
+- Home / Dashboard（合併首頁）：AI Greeting、Ask AI input、今日摘要、智慧家庭快捷控制、提醒預覽、三個正式模組入口。
 - Ask AI / AI Assistant：自然語言詢問、生活建議、提醒建立、家電控制意圖理解；mobile 以 floating entry 進入，不放 bottom nav。
 - Smart Home：設備列表、房間分類、燈光控制、On / Off 狀態、夜間操作。
 - AI Life Reminder：今日提醒、睡前提醒、喝水提醒、久未移動提醒、行程提醒、personal checklist、completed / missed / paused states。
@@ -21,7 +21,7 @@
 - Desktop 可使用側邊導覽或頂部導覽，但需保留核心四模組一致性。
 
 ## Stitch MCP 可理解描述
-產生一套生活 AI 產品資訊架構，以 Home 為中心連到三個正式 demo modules：明日簡報、智慧家庭控制、AI 生活提醒。Mobile bottom nav 使用 Home / Devices / Tasks / Settings，Ask AI 以獨立 floating entry 進入。
+產生一套生活 AI 產品資訊架構，以 Home / Dashboard（合併首頁）為中心連到三個正式 demo modules：明日簡報、智慧家庭控制、AI 生活提醒。Mobile bottom nav 使用 Home / Devices / Tasks / Settings，Ask AI 以獨立 floating entry 進入。
 
 ## i18n / 中英切換
 - MVP 需支援繁體中文 / English 兩種語言。

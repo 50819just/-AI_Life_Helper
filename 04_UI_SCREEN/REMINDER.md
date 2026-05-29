@@ -1,7 +1,7 @@
 # REMINDER
 
 ## 文件用途
-定義 AI Life Assistant 中 Reminder 頁面的 UI Screen Spec，包含頁面用途、資訊架構、主要區塊、提醒狀態、空狀態、AI 建議邏輯與 Light / Dark Mode 注意事項。
+定義 NestBuddy 中 Reminder 頁面的 UI Screen Spec，包含頁面用途、資訊架構、主要區塊、提醒狀態、空狀態、AI 建議邏輯與 Light / Dark Mode 注意事項。
 
 Reminder 是三個主模組之一，不只是提醒清單，而是協助使用者管理日常生活節奏、準備事項與低壓提醒的核心頁面。
 
@@ -53,7 +53,7 @@ Reminder
 └── Bottom Navigation
     ├── Home
     ├── AI Assistant / AI Chat
-    ├── Smart Home / Dashboard
+    ├── Smart Home / Dashboard（合併首頁）
     ├── Reminder
     └── Settings or Notification, depending on nav version
 ```
@@ -278,7 +278,7 @@ Home / Devices / Tasks / Settings
 
 ### Part 1 完整導覽版本
 ```text
-Home / Dashboard / AI Chat / Notification / Settings
+Home / Dashboard（合併首頁） / AI Chat / Notification / Settings
 ```
 
 若使用 Part 1 完整導覽，Reminder 可透過 Notification、Home Module Library 或 AI Chat 進入；若 Reminder 是主模組頁，需在 prompt 中明確指定對應導航策略，避免 Stitch 混用兩套 Bottom Navigation。
@@ -303,7 +303,7 @@ Home / Dashboard / AI Chat / Notification / Settings
 
 ## 8. Stitch MCP 可理解描述
 
-Create a Reminder screen for AI Life Assistant as a core module, not just a simple list. Include header, AI reminder summary card, reminder list, upcoming reminders, missed reminders, completed reminders, paused reminders, and empty states. Use Stitch presets as design token source. Keep reminders calm, readable, low-pressure, and lifestyle-oriented. Missed reminders should feel recoverable, not like failure. Support light and dark mode with soft glassmorphism and clear mobile navigation state.
+Create a Reminder screen for NestBuddy as a core module, not just a simple list. Include header, AI reminder summary card, reminder list, upcoming reminders, missed reminders, completed reminders, paused reminders, and empty states. Use Stitch presets as design token source. Keep reminders calm, readable, low-pressure, and lifestyle-oriented. Missed reminders should feel recoverable, not like failure. Support light and dark mode with soft glassmorphism and clear mobile navigation state.
 
 
 ## Current Module Lock

@@ -1,18 +1,18 @@
 # Demo Script
 
 ## Document Purpose
-Define the product-like demo script for AI Life Assistant. This script shows how Home / Dashboard leads users into the three formal demo modules: Tomorrow Briefing, Smart Home Control, and AI Life Reminder.
+Define the product-like demo script for NestBuddy. This script shows how Home / Dashboard（合併首頁） leads users into the three formal demo modules: Tomorrow Briefing, Smart Home Control, and AI Life Reminder.
 
 ## Scope
 This demo script is designed for a Product-like Demo Prototype. It should feel like a real product journey while staying inside demo scope.
 
 ## Demo Goal
-Show how AI Life Assistant helps the user prepare for tomorrow, adjust the home environment, and complete gentle lifestyle reminders.
+Show how NestBuddy helps the user prepare for tomorrow, adjust the home environment, and complete gentle lifestyle reminders.
 
 ## Demo Flow Overview
 
 ```txt
-Home / Dashboard
+Home / Dashboard（合併首頁）
 ↓
 Tomorrow Briefing
 ↓
@@ -23,13 +23,13 @@ AI Life Reminder
   └── Personal Reminders Scenario
 ```
 
-## Step 1. Home / Dashboard
+## Step 1. Home / Dashboard（合併首頁）
 The user enters Home.
 
 Home shows:
 - AI Greeting
-- AI Chat Entry
-- Dashboard Summary
+- AI Chat Entry（AI Ask anything）
+- Dashboard Summary（Home 內摘要區，現行首頁摘要卡）
 - Tomorrow Briefing card
 - Smart Home Control card
 - AI Life Reminder card
@@ -38,7 +38,7 @@ Home shows:
 AI greeting example:
 
 ```text
-Hi Darius，今天過得還好嗎？今晚可以先整理明天的行程，再進入睡眠模式。
+Hi 哲宇，今天過得還好嗎？今晚可以先整理明天的行程，再進入睡眠模式。
 ```
 
 ## Step 2. Tomorrow Briefing
@@ -81,6 +81,7 @@ System shows:
 - Brightness and color temperature controls
 - Smart scenes
 - AI Recommended Scene
+- On / Off 狀態採綠燈 / 紅燈 icon 與文字並存
 
 AI says:
 
@@ -167,4 +168,4 @@ System shows:
 - Codex should keep demo scope focused and avoid expanding into full commercial features.
 
 ## Stitch MCP Description
-Create a product-like demo storyboard for AI Life Assistant showing Home / Dashboard, Tomorrow Briefing, Smart Home Control with Sleep Environment scenario, and AI Life Reminder with Personal Reminders scenario. Use calm lifestyle smart home visual direction, soft glassmorphism, light/dark mode support, and low-pressure AI language.
+Create a product-like demo storyboard for NestBuddy showing Home / Dashboard（合併首頁）, Tomorrow Briefing, Smart Home Control with Sleep Environment scenario, and AI Life Reminder with Personal Reminders scenario. Use calm lifestyle smart home visual direction, soft glassmorphism, the current Light Mode palette, and low-pressure AI language.

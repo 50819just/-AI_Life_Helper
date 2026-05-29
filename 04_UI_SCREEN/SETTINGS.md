@@ -5,6 +5,7 @@
 
 ## 初版規格
 - 入口：Mobile bottom nav 第四項、desktop sidebar bottom utility、Home 右上角、Profile、更多選單。
+- 現行畫面範圍：設定頁偏科技控制台感，包含系統狀態、外觀模式、語言與回到 Dashboard 的入口。
 - 內容：帳號、主題模式、通知偏好、智慧設備連線、AI 偏好。
 - Mobile 中屬於 Bottom Nav 核心四項之一；desktop 中不是 primary nav。
 
@@ -17,6 +18,12 @@
 - Desktop 可作獨立設定頁。
 - Tablet 使用分組卡片。
 - Mobile 使用列表與分段頁。
+
+## 現行畫面參考
+- 左上可保留系統型資訊卡，如 Theme / Sync / Mode。
+- 中段可有 Appearance / 外觀模式。
+- 可有 Language / 語言卡。
+- 底部提供 `回到 Dashboard` 入口，方便設定後回主畫面。
 
 ## Stitch MCP 可理解描述
 Settings screen is the fourth mobile bottom navigation item and a desktop sidebar bottom utility entry. Include theme, notification, account, device connection, language, and AI preferences.

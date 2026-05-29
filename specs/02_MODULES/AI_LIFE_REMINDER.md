@@ -1,7 +1,7 @@
 # AI Life Reminder / AI 生活提醒
 
 ## Document Purpose
-Define AI Life Reminder as one of the three formal demo modules for AI Life Assistant. This module demonstrates proactive lifestyle reminders without becoming a full health management system or strict productivity app.
+Define AI Life Reminder as one of the three formal demo modules for NestBuddy. This module demonstrates proactive lifestyle reminders without becoming a full health management system or strict productivity app.
 
 ## Scope
 AI Life Reminder focuses on gentle, contextual life reminders:
@@ -194,7 +194,7 @@ When generating this module:
 - Codex should keep reminder language low-pressure and non-medical.
 
 ## Stitch MCP Description
-Create an AI Life Reminder demo module for AI Life Assistant. Show today reminders, bedtime reminders, drink water reminder, no movement reminder, schedule reminder, personal checklist, AI suggestion, completed state, and missed reminder recovery. Keep the tone calm, low-pressure, and lifestyle-oriented. Do not generate a full health platform or strict todo app.
+Create an AI Life Reminder demo module for NestBuddy. Show today reminders, bedtime reminders, drink water reminder, no movement reminder, schedule reminder, personal checklist, AI suggestion, completed state, and missed reminder recovery. Keep the tone calm, low-pressure, and lifestyle-oriented. Do not generate a full health platform or strict todo app.
 
 ## Visual / Mobile Implementation Lock
 

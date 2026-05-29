@@ -1,7 +1,7 @@
 # GENERATION_BOUNDARY
 
 ## Document Purpose
-Define generation boundaries for Stitch, Cursor, and Codex so AI Life Assistant remains a focused Product-like Demo Prototype instead of expanding into a full commercial product.
+Define generation boundaries for Stitch, Cursor, and Codex so NestBuddy remains a focused Product-like Demo Prototype instead of expanding into a full commercial product.
 
 ## Scope
 This file explains which parts can be generated as full demo screens, which parts are scenario references, and which parts must remain Coming Soon.
@@ -53,6 +53,12 @@ Dark / Night / Nocturnal variants only after the Light Mode screen is approved.
 ```
 
 Do not start with dark mode, even for bedtime or sleep-related modules. Bedtime context can be represented in content, hierarchy, and tone while still using the approved Light Mode direction.
+
+## Current UI Lock
+
+- Home and Dashboard are merged into a single homepage entry in the current UI.
+- Light Mode is the current source of truth for this pass.
+- Dark Mode remains the existing separate system reference and is not being reworked in this round.
 
 ## Do Not Generate
 Do not generate:

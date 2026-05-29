@@ -1,7 +1,7 @@
 # RESPONSIVE_RULE
 
 ## 文件用途
-定義 AI Life Assistant 在 Desktop、Tablet、Mobile 三種主要寬度下的版面、導覽、可點擊性與手機易用性規則。
+定義 NestBuddy 在 Desktop、Tablet、Mobile 三種主要寬度下的版面、導覽、可點擊性與手機易用性規則。
 
 ## Current Source of Truth
 
@@ -17,9 +17,9 @@ Mobile: bottom function bar + floating Ask AI
 - Layout：12 欄 grid，內容主區保持寬鬆，不做高密度 SaaS dashboard。
 - Navigation：使用 left sidebar 作為主要 app shell。
 - Sidebar 第一個主要 action 固定為 `New Chat`，不翻譯。
-- `Ask AI` 固定英文，不翻譯。
+- Sidebar 的首頁入口現行顯示為 `Dashboard`。
 - Sidebar bottom appearance control 是實心 pill button：`亮色模式`。
-- Home：Hi Darius greeting、Ask AI command bar、今日節奏 / 快速狀態、三個正式模組卡、低調 `更多模組 →`。
+- Home：Hi 哲宇 greeting、Ask AI command bar、今日節奏 / 快速狀態、三個正式模組卡、低調 `更多模組 →`。
 - Module detail：沿用 sidebar，只替換主內容區。
 
 ## Tablet — 1024px
@@ -57,9 +57,9 @@ Home / Devices / Tasks / Settings
 
 ## Color / Mode Behavior
 - 目前 UI generation 一律 Light Mode first。
-- Light Mode 使用 softened Atmospheric Glassmorphism：warm white、pale mint、soft teal、soft blue、lavender / blue shadow。
+- Light Mode 使用 softened Atmospheric Glassmorphism：warm white、pale mint、soft teal、soft blue、lavender / blue shadow，並以現行藍色漸層 CTA、白字、白 icon 為主。
 - 不得產生純黑、大面積死黑、黑色 sidebar 或黑色卡片。
-- Dark Mode 明天再做；不得在 Light Mode pass 順手產 dark / night variant。
+- Dark Mode 先保留既有系統；不得在 Light Mode pass 順手產 dark / night variant。
 
 ## Stitch MCP 可理解描述
-Generate responsive screens for Desktop, Tablet, and Mobile. Desktop uses a light glass left sidebar with `New Chat` and a solid `亮色模式` pill. Mobile uses bottom navigation `Home / Devices / Tasks / Settings` and an independent floating `Ask AI` entry. Prioritize thumb-friendly tap targets, safe-area spacing, single-column clarity, and low cognitive load. Use softened Atmospheric Glassmorphism Light Mode and avoid pure black or heavy black surfaces.
+Generate responsive screens for Desktop, Tablet, and Mobile. Desktop uses a light glass left sidebar with `New Chat`, `Dashboard` as the home entry, and a solid `亮色模式` pill. Mobile uses bottom navigation `Home / Devices / Tasks / Settings` and an independent floating `Ask AI` entry. Prioritize thumb-friendly tap targets, safe-area spacing, single-column clarity, and low cognitive load. Use softened Atmospheric Glassmorphism Light Mode and avoid pure black or heavy black surfaces.

@@ -1,7 +1,7 @@
 # Smart Home Control / 智慧家庭控制
 
 ## Document Purpose
-Define Smart Home Control as one of the three formal demo modules for AI Life Assistant. This module demonstrates smart device control through a calm, product-like demo flow without becoming a full smart home platform.
+Define Smart Home Control as one of the three formal demo modules for NestBuddy. This module demonstrates smart device control through a calm, product-like demo flow without becoming a full smart home platform.
 
 ## Scope
 Smart Home Control focuses on a small set of understandable smart home interactions:
@@ -63,6 +63,11 @@ Each device card should show:
 - Main control
 - Small status metadata when useful
 
+Current screen lock:
+- Use separate status chips / icons for On and Off, with green for On and red for Off.
+- Sleep Mode can trigger a day/night mode switch in the UI.
+- A small standalone clock block can appear beside the sleep scene controls.
+
 ## Lighting Control
 
 ### ON / OFF
@@ -84,6 +89,7 @@ Light / Dark Mode is a product-level rule, but this module can demonstrate how l
 - Light Mode uses Atmospheric Glassmorphism preset.
 - Dark Mode uses Nocturnal Clarity preset.
 - Night interactions must stay low-brightness and comfortable.
+- Current Light Mode screen should keep the present palette and not invent a new color system.
 
 ## Smart Scene
 Demo scenes should stay simple:
@@ -173,13 +179,14 @@ When generating this module:
 - Codex should preserve this module boundary and keep Sleep Environment as a child scenario.
 
 ## Stitch MCP Description
-Create a Smart Home Control demo module for AI Life Assistant. Show a calm smart home device dashboard with light on/off, brightness, color temperature, simple smart scenes, and an AI-recommended scene. Use Stitch light/dark presets, soft glassmorphism, high readability, and low-brightness night behavior. Do not generate a complete smart home platform or automation builder.
+Create a Smart Home Control demo module for NestBuddy. Show a calm smart home device dashboard with light on/off, brightness, color temperature, simple smart scenes, and an AI-recommended scene. Use Stitch light/dark presets, soft glassmorphism, high readability, and low-brightness night behavior. Do not generate a complete smart home platform or automation builder.
 
 ## Visual / Mobile Implementation Lock
 
 - Light Mode uses softened Atmospheric Glassmorphism: warm white, pale mint, soft teal, soft blue, lavender / blue shadow.
 - Do not use pure black, large dead-black surfaces, black sidebar, black device cards, or high-saturation green.
 - Dark Mode uses the stable Nocturnal Clarity system in the next UI pass; do not mix dark tokens into Light Mode.
+- Current device cards should stay visually layered rather than flat.
 - Mobile order: title → AI recommended scene → primary device cards → lighting controls → simple scenes → Sleep Mode.
 - Mobile controls need thumb-friendly hit areas; sliders must be easy to drag.
 - Bottom nav active context: Devices.

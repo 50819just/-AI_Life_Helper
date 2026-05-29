@@ -1,7 +1,7 @@
 # Mock Data
 
 ## Document Purpose
-Provide sample data for AI Life Assistant Product-like Demo Prototype. This mock data supports Home / Dashboard, three formal demo modules, scenario specs, and Stitch / Cursor / Codex generation.
+Provide sample data for NestBuddy Product-like Demo Prototype. This mock data supports Home / Dashboard（合併首頁）, three formal demo modules, scenario specs, and Stitch / Cursor / Codex generation.
 
 ## Scope
 This file includes mock data for:
@@ -18,12 +18,12 @@ This file includes mock data for:
 ## Global Demo Context
 ```json
 {
-  "userName": "Darius",
-  "currentTime": "22:30",
+  "userName": "哲宇",
+  "currentTime": "09:30",
   "date": "2026-05-29",
-  "mode": "dark",
+  "mode": "light",
   "device": "mobile",
-  "scenario": "night_preparation",
+  "scenario": "dashboard_home",
   "bottomNavActive": "Home"
 }
 ```
@@ -31,13 +31,15 @@ This file includes mock data for:
 ## Home Dashboard Mock Data
 ```json
 {
-  "greeting": "Hi Darius，今天過得還好嗎？",
-  "aiChatEntry": "Ask AI",
+  "greeting": "Hi 哲宇，今天過得還好嗎？",
+  "aiChatEntry": "AI Ask anything",
+  "aiSuggestions": ["我想早起", "關燈", "提醒生活"],
+  "aiCategories": ["個人", "家庭", "工作"],
   "dashboardSummary": {
-    "today": "今晚還有 2 個提醒需要確認。",
-    "tomorrow": "明天 08:30 有第一個重點行程。",
-    "smartHome": "臥室燈開啟中，建議睡前切換睡眠模式。",
-    "reminder": "安心清單還有 2 項未完成。"
+    "environment": "30%",
+    "humidity": "濕度",
+    "sleepAnalysis": "7.5 hrs · 優質 +12%",
+    "quickActions": "3 個常用動作"
   },
   "moduleCards": [
     { "id": "tomorrow_briefing", "title": "Tomorrow Briefing", "status": "需要確認明日起床時間" },
@@ -59,7 +61,7 @@ This file includes mock data for:
       "time": "08:30",
       "title": "工廠端同步會議",
       "type": "meeting",
-      "preparation": "確認 AI Life Assistant MVP module spec"
+      "preparation": "確認 NestBuddy MVP module spec"
     },
     {
       "time": "15:30",
@@ -169,15 +171,15 @@ This file includes mock data for:
 {
   "lightModePreset": "Atmospheric Glassmorphism",
   "darkModePreset": "Nocturnal Clarity",
-  "currentMode": "dark",
-  "nightLowBrightness": true
+  "currentMode": "light",
+  "nightLowBrightness": false
 }
 ```
 
 ## Mobile Bottom Navigation State
 ```json
 {
-  "items": ["Home", "AI Assistant", "Smart Home", "Reminder"],
+  "items": ["Home", "Devices", "Tasks", "Settings"],
   "active": "Home",
   "settingsEntry": "profile_or_top_right"
 }

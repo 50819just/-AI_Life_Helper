@@ -1,7 +1,7 @@
 # HOME_DASHBOARD
 
 ## Document Purpose
-Define Home / Dashboard as the formal product entry and demo navigation surface for AI Life Assistant. Home should look like a polished product entry screen while keeping the demo scope focused on three core modules.
+Define Home / Dashboard（合併首頁） as the formal product entry and demo navigation surface for NestBuddy. Home should look like a polished product entry screen while keeping the demo scope focused on three core modules.
 
 ## Current Stitch Source
 
@@ -17,16 +17,16 @@ https://stitch.withgoogle.com/projects/8270097307517936032?node-id=e4d9ae36311c4
 ```
 
 ## Scope
-Home / Dashboard includes:
+Home / Dashboard（合併首頁） includes:
 - Desktop left sidebar app shell
 - Mobile bottom function bar
 - AI Greeting / personal daily context
 - Ask AI command bar or floating entry
-- Dashboard Summary / quick status
+- Dashboard Summary（Home 內摘要區） / quick status
 - Three formal module cards only
 - Low-key More Modules entry
 
-Home / Dashboard does **not** include:
+Home / Dashboard（合併首頁） does **not** include:
 - A full SaaS dashboard
 - Full module flows inside Home
 - Coming Soon card grid on Home
@@ -34,24 +34,27 @@ Home / Dashboard does **not** include:
 - A separate Dashboard primary nav item
 
 ## Page Purpose
-Home is the product home / entry / navigation surface. It helps users quickly understand what AI Life Assistant can do and gives clear access to the three core demo modules.
+Home is the product home / entry / navigation surface. It helps users quickly understand what NestBuddy can do and gives clear access to the three core demo modules.
 
 Home is not a pure landing page and not a full enterprise dashboard.
 
 ## 中文版定位
 
-Home 是 AI Life Assistant 的「產品首頁 / 主要入口 / 導覽中心」。
+Home 是 NestBuddy 的「產品首頁 / 主要入口 / 導覽中心」。
 
 Home 可以出現：
-- Hi Darius greeting
+- Hi 哲宇 greeting
 - 時間 / 天氣 / 今日狀態，例如：`09:30 · 晴朗 · 今天適合先整理三件事`
 - Ask AI command bar
+- Ask AI 建議按鈕：`我想早起` / `關燈` / `提醒生活`
+- Ask AI 分類 chips：`個人` / `家庭` / `工作`
 - 今日節奏 / 快速狀態
 - 常用模組
 - 更多模組入口
 - Header / Nav / Footer 等產品框架元素
 
 Home 不等於完整 Dashboard。Dashboard 在本專案中預設作為 Home 裡的一個 summary section，而不是獨立主導航頁。
+目前現行畫面中，Desktop sidebar 的 `Dashboard` 代表 Home 入口；Home 與 Dashboard 已合併成同一個首頁視圖。
 
 建議資訊架構：
 
@@ -62,7 +65,10 @@ Home
 ├─ Ask AI / AI Chat Entry
 │  ├─ Desktop: command bar / input entry
 │  └─ Mobile: independent floating button / floating input entry
-├─ Dashboard Summary / 今日節奏 / 快速狀態
+├─ Dashboard Summary（Home 內摘要區） / 今日節奏 / 快速狀態
+│  ├─ 環境 / 濕度
+│  ├─ 睡眠分析
+│  └─ 快速動作
 ├─ 常用模組 / Frequent Modules
 │  ├─ Tomorrow Briefing / 明日簡報
 │  ├─ Smart Home Control / 智慧家庭控制
@@ -95,7 +101,7 @@ Desktop Home uses a left sidebar.
 Required sidebar behavior:
 - Sidebar first primary action is `New Chat`.
 - `New Chat` stays English. Do not translate it.
-- `Ask AI` stays English. Do not translate it.
+- `Dashboard` 是 desktop sidebar 的首頁入口；`Ask AI` 不放在 sidebar primary nav。
 - Other interface copy should mainly use Traditional Chinese.
 - Sidebar bottom appearance control is not a sliding toggle.
 - It is a solid pill button with the label `亮色模式`.
@@ -123,7 +129,7 @@ Home should create a polished first impression:
 Example:
 
 ```text
-Hi Darius，今天過得還好嗎？
+Hi 哲宇，今天過得還好嗎？
 ```
 
 ## Home as Demo Navigation
@@ -138,7 +144,7 @@ Each module card should show a short summary and one clear entry action.
 AI Greeting should be warm, concise, and contextual.
 
 Examples:
-- 「Hi Darius，今天過得還好嗎？」
+- 「Hi 哲宇，今天過得還好嗎？」
 - 「今晚可以先整理明天的行程，再進入睡眠模式。」
 - 「09:30 · 晴朗 · 今天適合先整理三件事」
 
@@ -151,9 +157,22 @@ Required label:
 Ask AI
 ```
 
+Current placeholder:
+
+```txt
+AI Ask anything
+```
+
+Current helper prompts:
+
+```txt
+沒想法嗎？給你建議
+我想早起 / 關燈 / 提醒生活
+```
+
 The entry opens AI Assistant / AI Chat, not a full unrelated chatbot product.
 
-## Dashboard Summary
+## Dashboard Summary（Home 內摘要區）
 
 ### Today Summary
 Shows short daily context.
@@ -263,4 +282,4 @@ When generating Home:
 - Codex should preserve sidebar, mobile bottom navigation, More Modules boundary, and Light Mode priority.
 
 ## Stitch MCP Description
-Create a Light Mode Home screen for AI Life Assistant in the existing Stitch project `8270097307517936032`. The design should follow Atmospheric Glassmorphism Light Mode: warm white, pale mint, soft teal, soft blue, lavender / blue shadow, and obsidian text only for readable text or primary buttons. Desktop uses a left sidebar with `New Chat` as the first action and a solid `亮色模式` pill button at the bottom. Mobile uses bottom navigation `Home / Devices / Tasks / Settings` with `Ask AI` as an independent floating entry. Home includes Hi Darius greeting, time/weather/daily context, Ask AI command bar, quick status, exactly three formal module cards, and a low-key `更多模組 →` entry under the cards. Do not show Coming Soon cards directly on Home.
+Create a Light Mode Home screen for NestBuddy in the existing Stitch project `8270097307517936032`. The design should follow Atmospheric Glassmorphism Light Mode: warm white, pale mint, soft teal, soft blue, lavender / blue shadow, and obsidian text only for readable text or primary buttons. Desktop uses a left sidebar with `New Chat` as the first action and a solid `亮色模式` pill button at the bottom. Mobile uses bottom navigation `Home / Devices / Tasks / Settings` with `Ask AI` as an independent floating entry. Home includes Hi 哲宇 greeting, time/weather/daily context, Ask AI command bar, quick status, exactly three formal module cards, and a low-key `更多模組 →` entry under the cards. Do not show Coming Soon cards directly on Home.

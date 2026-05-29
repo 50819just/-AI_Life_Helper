@@ -5,7 +5,9 @@
 
 ## 初版規格
 - 主要區塊：Conversation Area、Suggested Actions、Input Bar、Context Cards。
-- Suggested Actions 可包含「幫我整理今天」、「新增提醒」、「關閉客廳燈」。
+- Suggested Actions 目前可對齊現行畫面：`我想早起`、`關燈`、`提醒生活`。
+- Input placeholder 目前固定為 `AI Ask anything`。
+- Categories chips 目前為 `個人`、`家庭`、`工作`，並可置於 Ask AI 大區塊外。
 - Context Cards 顯示 AI 可操作或引用的提醒、設備、行程摘要。
 
 ## UX 規則
@@ -23,6 +25,6 @@ AI Assistant screen with calm chat UI, suggested action chips, context cards for
 
 
 ## Visual Rules
-- Light Mode 使用 softened Atmospheric Glassmorphism，避免純黑與大面積死黑。
-- Dark Mode 明天使用 stable Nocturnal Clarity system。
+- Light Mode 使用 softened Atmospheric Glassmorphism，並以現行藍色漸層 CTA、白字、白 icon 為主，避免純黑與大面積死黑。
+- Dark Mode 先保留既有 stable Nocturnal Clarity system。
 - `New Chat` 與 `Ask AI` 固定英文；其他介面文字以繁體中文為主。

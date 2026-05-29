@@ -2,7 +2,7 @@
 
 ## 文件用途
 
-定義 AI Life Assistant 的 mobile bottom navigation 規則。
+定義 NestBuddy 的 mobile bottom navigation 規則。
 
 ## Reference Screen
 
@@ -36,7 +36,7 @@ AI Chat / Ask AI 不放在 bottom function bar，改成獨立 floating action bu
 
 | Item | Destination |
 |---|---|
-| Home | Home / Dashboard Summary |
+| Home | Home / Dashboard（合併首頁） Summary |
 | Devices | Smart Home Control |
 | Tasks | AI Life Reminder / Personal Reminders |
 | Settings | Settings / Preferences |
@@ -69,7 +69,7 @@ Floating AI button 行為：
 
 | Screen | Active Nav Item |
 |---|---|
-| Home / Dashboard Summary | Home |
+| Home / Dashboard（合併首頁） Summary | Home |
 | AI Chat / Assistant | None; opened by floating Ask AI |
 | Smart Home Control | Devices |
 | Sleep Environment scenario | Devices |
@@ -93,7 +93,7 @@ AI Mood Analysis
 
 ## Rules
 
-- Dashboard Summary 是 Home 的摘要區塊，不是獨立 bottom nav。
+- Dashboard Summary（Home 內摘要區） 是 Home 的摘要區塊，不是獨立 bottom nav。
 - Notification 可以出現在 badge、Reminder state、Home summary，但不是 bottom nav。
 - Settings 在 mobile 可作為 bottom function bar 第四項；desktop 可放 sidebar bottom utility 或 profile menu。
 - AI Assistant / Ask AI 不作為 mobile bottom function bar item，使用 floating action button。
@@ -104,7 +104,7 @@ AI Mood Analysis
 避免生成：
 
 ```txt
-Home / Dashboard / AI Chat / Notification / Settings
+Home / Dashboard（合併首頁） / AI Chat / Notification / Settings
 ```
 
 必須使用：

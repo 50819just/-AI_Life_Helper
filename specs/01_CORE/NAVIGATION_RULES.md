@@ -1,7 +1,7 @@
 # NAVIGATION_RULES
 
 ## Document Purpose
-Define the global navigation rules for AI Life Assistant, especially mobile bottom navigation, Settings entry, and Coming Soon module behavior.
+Define the global navigation rules for NestBuddy, especially mobile bottom navigation, Settings entry, and Coming Soon module behavior.
 
 ## App Shell Source of Truth
 
@@ -43,8 +43,7 @@ Current desktop sidebar direction:
 
 ```txt
 New Chat
-首頁
-Ask AI
+Dashboard
 智慧家庭
 生活提醒
 ```
@@ -70,7 +69,7 @@ AI Chat / Ask AI is not part of the mobile bottom function bar. It uses an indep
 ### Item meaning
 | Item | Destination |
 |---|---|
-| Home | Home / Dashboard |
+| Home | Home / Dashboard（合併首頁） |
 | Devices | Smart Home Control |
 | Tasks | AI Life Reminder |
 | Settings | Settings / Preferences |
@@ -85,7 +84,7 @@ Allowed Settings entry:
 - Mobile bottom function bar
 
 ## Dashboard Rule
-Dashboard is part of Home summary. It is not a separate mobile bottom navigation item in the MVP demo.
+Dashboard is part of Home summary and is also the current desktop sidebar home entry. It is not a separate mobile bottom navigation item in the MVP demo.
 
 ## Notification Rule
 Notification can appear as:
@@ -104,7 +103,7 @@ They may appear only as disabled or preview cards inside Module Library / More M
 
 | Screen | Active Nav Item |
 |---|---|
-| Home / Dashboard | Home |
+| Home / Dashboard（合併首頁） | Home |
 | AI Chat / Assistant | None; opened by floating Ask AI |
 | Smart Home Control | Devices |
 | Sleep Environment scenario | Devices |
@@ -139,7 +138,7 @@ Do not mix other bottom navigation versions.
 Avoid:
 
 ```txt
-Home / Dashboard / AI Chat / Notification / Settings
+Home / Dashboard（合併首頁） / AI Chat / Notification / Settings
 ```
 
 Use:

@@ -1,7 +1,7 @@
 # Tomorrow Briefing / 明日簡報
 
 ## Document Purpose
-Define Tomorrow Briefing as one of the three formal demo modules for AI Life Assistant. This module is a bedtime tomorrow-preparation flow, not a full calendar dashboard.
+Define Tomorrow Briefing as one of the three formal demo modules for NestBuddy. This module is a bedtime tomorrow-preparation flow, not a full calendar dashboard.
 
 The main user need is:
 
@@ -235,7 +235,7 @@ When generating this module:
 - Codex should preserve the low-pressure bedtime flow and avoid expanding into task management.
 
 ## Stitch MCP Description
-Create a Tomorrow Briefing demo module for AI Life Assistant. Design it as a bedtime tomorrow-preparation flow, not a full calendar dashboard. Show night context, tomorrow's first important event, AI wake-up suggestion, one-tap alarm setup, short preparation checklist, and completion state: 明日準備完成，可以放心休息.
+Create a Tomorrow Briefing demo module for NestBuddy. Design it as a bedtime tomorrow-preparation flow, not a full calendar dashboard. Show night context, tomorrow's first important event, AI wake-up suggestion, one-tap alarm setup, short preparation checklist, and completion state: 明日準備完成，可以放心休息.
 
 ## Visual / Mobile Implementation Lock
 

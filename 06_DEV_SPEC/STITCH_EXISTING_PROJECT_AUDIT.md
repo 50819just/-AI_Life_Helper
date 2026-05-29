@@ -73,7 +73,7 @@ Dark mode 視覺原則：
 
 | Existing Stitch Screen 類型 | 新定位 | 處理方式 |
 |---|---|---|
-| Home Index Hub / Dashboard | Home / Dashboard 正式入口 | 從 Light / Dark 候選中挑主版，對齊 specs |
+| Home Index Hub / Dashboard | Home / Dashboard（合併首頁） 正式入口 | 從 Light 候選中挑主版，對齊現行首頁 |
 | Mobile Dashboard | Mobile Home candidate | 保留作 mobile 參考，檢查 bottom nav |
 | Night Dashboard | Dark Mode Home candidate | 保留作 dark mode 視覺參考 |
 | AI Schedule Secretary | Tomorrow Briefing | 改名 / 對齊 Tomorrow Briefing spec |
@@ -81,7 +81,7 @@ Dark mode 視覺原則：
 | Sleep Detail | Sleep Environment scenario | 降級為 Smart Home Control 子情境 |
 | AI Life Reminder Assistant | AI Life Reminder | 保留為正式 Demo Module 候選 |
 | Night Reminders Checklist / Checklist | Personal Reminders scenario | 降級為 AI Life Reminder 子情境 |
-| AI Chat variants | AI Assistant / AI Chat Entry | 保留，但需統一 Light / Dark 與 nav |
+| AI Chat variants | AI Assistant / AI Chat Entry | 保留，但需統一 Light / Dark 與 nav；desktop sidebar 不放成 primary nav |
 | Settings variants | Settings secondary page | 保留，但 Settings 不放 mobile bottom nav |
 | Splash Screen | Splash / Welcome | 可保留作產品開場 |
 | Dashboard Analytics Overview | 風險畫面 | 若太像 BI / SaaS dashboard，避免當主版 |
@@ -157,7 +157,7 @@ Keep Coming Soon modules as disabled or preview cards only.
 
 下一步應該是：
 
-1. 在既有 project `8270097307517936032` 中挑選 Home 的 Light / Dark 主候選。
+1. 在既有 project `8270097307517936032` 中挑選 Home 的 Light 主候選。
 1.5. 第一輪只挑 Light Mode 候選；Dark / Night 候選先不要處理。
 2. 檢查是否符合 mobile bottom navigation：
 

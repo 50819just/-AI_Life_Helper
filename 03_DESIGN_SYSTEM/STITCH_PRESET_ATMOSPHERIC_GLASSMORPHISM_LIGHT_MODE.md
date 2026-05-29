@@ -163,7 +163,7 @@ List items should be separated by thin, 1px lines at 10% opacity. Avoid heavy di
 
 ## Color Guardrails / 避免詭異黑色
 
-Although the base preset may include pure black tokens, AI Life Assistant should use a softened Light Mode interpretation.
+Although the base preset may include pure black tokens, NestBuddy should use a softened Light Mode interpretation.
 
 Required color direction:
 - warm white background
