@@ -92,6 +92,9 @@ html {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition:
+    background 950ms ease-in-out,
+    color 950ms ease-in-out;
 }
 
 html.dark {
@@ -107,6 +110,7 @@ body {
   min-height: 100vh;
   color: var(--text);
   background: transparent;
+  transition: color 950ms ease-in-out;
 }
 
 button,
