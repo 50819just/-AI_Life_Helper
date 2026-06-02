@@ -2364,7 +2364,8 @@ function ReminderRoutineFlow() {
   }
 
   const allChecklistCompleted = checklist.every((item) => item.status === 'completed')
-  const contextCollapsed = phase !== 'confirm'
+  const conversationStarted = messages.length > 0 || typing
+  const contextCollapsed = phase !== 'confirm' || conversationStarted
   const visibleMessages = contextCollapsed ? messages.slice(-3) : messages
 
   useEffect(() => {
@@ -2413,7 +2414,7 @@ function ReminderRoutineFlow() {
   }, [phase])
 
   useEffect(() => {
-    const shouldFocusRoutine = phase === 'confirm'
+    const shouldFocusRoutine = phase === 'confirm' && !conversationStarted
 
     if (!shouldFocusRoutine) return undefined
 
@@ -2425,7 +2426,7 @@ function ReminderRoutineFlow() {
     }, 140)
 
     return () => window.clearTimeout(focusTimer)
-  }, [phase, showBatteryCard, showChecklistCards, steps, typing, introVisible, messages.length])
+  }, [conversationStarted, phase, showBatteryCard, showChecklistCards, steps, typing, introVisible, messages.length])
 
   return (
     <section className="reminder-routine-flow" aria-label="睡前安心清單" ref={routineCardRef}>
@@ -2483,7 +2484,7 @@ function ReminderRoutineFlow() {
               </div>
             </div>
           ) : null}
-          {phase === 'confirm' && introVisible ? (
+          {phase === 'confirm' && introVisible && !conversationStarted ? (
             <div className="routine-confirm-card glass confirm-reveal">
               <p className="summary-kicker">睡前安心清單 AI Chat</p>
               <h4>我可以幫你整理今晚的安心清單。開始前，我想先確認一下：你是想整理睡前準備、明日行程，還是家中設備與充電狀態？</h4>
@@ -2504,16 +2505,16 @@ function ReminderRoutineFlow() {
           ) : null}
         </div>
 
-        <form className={`routine-compose glass ${phase !== 'confirm' ? 'locked' : ''}`} onSubmit={handleDraftSubmit}>
+        <form className={`routine-compose glass ${phase !== 'confirm' || conversationStarted ? 'locked' : ''}`} onSubmit={handleDraftSubmit}>
           <div className="routine-compose-icon"><Icon name="auto_awesome" small /></div>
           <input
             type="text"
             value={draftMessage}
             onChange={(event) => setDraftMessage(event.target.value)}
             placeholder="直接告訴我你想先整理什麼..."
-            disabled={phase !== 'confirm'}
+            disabled={phase !== 'confirm' || conversationStarted}
           />
-          <button type="submit" className="send-button" disabled={phase !== 'confirm' || !draftMessage.trim()}>
+          <button type="submit" className="send-button" disabled={phase !== 'confirm' || conversationStarted || !draftMessage.trim()}>
             <Icon name="send" small />
           </button>
         </form>
