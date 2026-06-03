@@ -50,6 +50,13 @@ const indoorTemperatureReadings = [
   { value: '24.8°', bar: 54 },
 ]
 
+const sleepAnalysisReadings = [
+  { value: '7.5', caption: '小時', note: '優質 +12%', bar: 78 },
+  { value: '7.1', caption: '小時', note: '睡眠就緒', bar: 72 },
+  { value: '8.0', caption: '小時', note: '深睡穩定 +9%', bar: 84 },
+  { value: '6.8', caption: '小時', note: '建議提早休息', bar: 66 },
+]
+
 const modules = [
   {
     id: 'briefing',
@@ -473,24 +480,39 @@ const reminderRoutineChecklistTemplate = [
   {
     id: 'battery',
     title: '手機與裝置充電',
-    caption: 'iPhone 目前 18%，Apple Watch 24%，隨身充 12%。建議睡前先把主要裝置接上電源。',
+    caption: '主要裝置電量偏低，先接上電源，明早比較不用補救。',
     tag: '高優先',
+    category: '充電提醒',
+    icon: 'battery_alert',
+    tone: 'urgent',
+    detail: 'iPhone 18%、Apple Watch 24%、隨身充 12%，都建議睡前先充電。耳機 35%，可以順手補電。',
+    checklist: ['iPhone 接上電源', 'Apple Watch 放上充電座', '隨身充補電', '耳機順手充電'],
     actionPrimary: '已完成',
     actionSecondary: '稍後提醒',
   },
   {
     id: 'meeting-items',
     title: '明日會議準備',
-    caption: '明天 09:00 有專案同步會議，建議今晚先把識別證、鑰匙與筆電充電器放進包包。',
+    caption: '明天 09:00 有專案同步會議，今晚先把出門物品放到固定位置。',
     tag: '明日準備',
+    category: '明日準備',
+    icon: 'badge',
+    tone: 'prepare',
+    detail: '建議把識別證、鑰匙與筆電充電器放進包包；會議資料如果還沒開過，睡前只做一次快速確認就好。',
+    checklist: ['識別證', '鑰匙', '筆電充電器', '會議資料快速確認'],
     actionPrimary: '已完成',
     actionSecondary: '稍後提醒',
   },
   {
     id: 'trash',
     title: '倒垃圾提醒',
-    caption: '今晚 20:30 的倒垃圾提醒尚未完成，如果今天還來得及，可以先處理。',
+    caption: '今晚 20:30 的倒垃圾提醒尚未完成，若還來得及，可以先處理。',
     tag: '生活事項',
+    category: '生活事項',
+    icon: 'delete',
+    tone: 'life',
+    detail: '這件事可以今天處理，也可以改成明天提醒；它不需要卡住你整個晚上。',
+    checklist: ['確認垃圾袋', '出門順手帶走', '若太晚就改明天提醒'],
     actionPrimary: '已完成',
     actionSecondary: '明天提醒',
   },
@@ -523,6 +545,13 @@ function App() {
     const hashPage = window.location.hash.replace('#', '')
     return pageMap[hashPage] ? hashPage : 'home'
   })
+  const [showWelcome, setShowWelcome] = useState(() => {
+    if (typeof window === 'undefined') return true
+    const hashPage = window.location.hash.replace('#', '')
+    return !pageMap[hashPage]
+  })
+  const [welcomeExiting, setWelcomeExiting] = useState(false)
+  const [homeEntering, setHomeEntering] = useState(false)
   const [now, setNow] = useState(() => new Date())
   const [sleepModeActive, setSleepModeActive] = useState(false)
   const [deviceStates, setDeviceStates] = useState(deviceCards)
@@ -604,6 +633,19 @@ function App() {
     setReminderFlowRequestId((value) => value + 1)
     window.requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'smooth' }))
   }, [])
+
+  const enterHomeIndex = useCallback(() => {
+    if (welcomeExiting) return
+    setTheme('light')
+    setWelcomeExiting(true)
+
+    window.setTimeout(() => {
+      setShowWelcome(false)
+      setWelcomeExiting(false)
+      setHomeEntering(true)
+      goToPage('home')
+    }, 500)
+  }, [goToPage, welcomeExiting])
 
   const toggleDeviceState = (name) => {
     setDeviceStates((current) =>
@@ -755,8 +797,22 @@ function App() {
     return () => window.clearTimeout(followTimer)
   }, [morningAutoFollowTick, morningFlow.active, morningFlow.completed, morningFlowView.smartHomeStarted, page])
 
+  useEffect(() => {
+    if (!homeEntering) return undefined
+
+    const enterTimer = window.setTimeout(() => {
+      setHomeEntering(false)
+    }, 1200)
+
+    return () => window.clearTimeout(enterTimer)
+  }, [homeEntering])
+
+  if (showWelcome) {
+    return <SplashWelcomePage isExiting={welcomeExiting} onEnter={enterHomeIndex} />
+  }
+
   return (
-    <div className="shell">
+    <div className={`shell ${homeEntering ? 'home-entering' : ''}`.trim()}>
       {mobileSearchOpen ? (
         <form className="mobile-brand-bar mobile-search-bar glass" role="search" onSubmit={handleMobileSearchSubmit}>
           <Icon name="search" small aria-hidden="true" />
@@ -838,7 +894,7 @@ function App() {
         </div>
       </aside>
 
-      <main className="content" id="home">
+      <main className={`content content-${page}`} id="home">
         <div className="content-inner">
           <header className="header">
             <LiveStatusRow currentTime={currentTime} className="mobile-main-status-row" />
@@ -874,6 +930,7 @@ function App() {
               onPickCategory={setAskCategory}
               onPickPrompt={(prompt) => setAskText(prompt)}
               onSubmit={handleAskSubmit}
+              onStartMorningConversation={startMorningConversation}
             />
           ) : null}
           {page === 'assistant' ? <AssistantPage morningFlow={morningFlow} morningFlowView={morningFlowView} goToPage={goToPage} /> : null}
@@ -926,6 +983,27 @@ const pageMap = {
   modules: { kicker: 'MODULE LIBRARY / 更多模組', title: '更多模組先低調預覽，不展開成完整功能。' },
 }
 
+function SplashWelcomePage({ isExiting = false, onEnter }) {
+  return (
+    <main className={`splash-welcome ${isExiting ? 'is-exiting' : ''}`.trim()} aria-label="巢伴 Nest Buddy 產品進場頁">
+      <section className="splash-hero" aria-label="巢伴 Nest Buddy 產品進場頁">
+        <div className="splash-logo-wrap">
+          <img className="splash-logo" src={nestBuddyLogo} alt="巢伴 Nest Buddy logo" />
+        </div>
+
+        <p className="splash-description">
+          整合 AI 助理、生活提醒、行事曆同步與智慧家電控制，在適合的時間主動幫你整理行程、準備睡眠節奏，讓家更懂你的生活步調。
+        </p>
+
+        <button className="splash-primary-cta" type="button" onClick={onEnter}>
+          <span>Enter Home</span>
+          <Icon name="arrow_forward" small />
+        </button>
+      </section>
+    </main>
+  )
+}
+
 const categoryTabs = [
   { label: '個人', icon: 'person' },
   { label: '家庭', icon: 'home' },
@@ -945,6 +1023,7 @@ const bottomNavIconMap = {
   task_alt: '✓',
   settings: '⚙',
 }
+
 
 
 const iconPaths = {
@@ -988,6 +1067,8 @@ const iconPaths = {
   delete: [<path key="1" d="M5 7h14M10 11v6M14 11v6M8 7l1 13h6l1-13M10 7V5h4v2" />],
   help: [<circle key="1" cx="12" cy="12" r="9" />, <path key="2" d="M9.8 9a2.4 2.4 0 0 1 4.5 1.2c0 1.8-2.3 2-2.3 3.8M12 17h.01" />],
 }
+
+
 
 function Icon({ name, className = '', small = false, ...props }) {
   const paths = iconPaths[name] ?? iconPaths.auto_awesome
@@ -1156,9 +1237,11 @@ function SidebarMorningTask({ completed, onOpenChat }) {
   )
 }
 
-function HomePage({ goToPage, askText, askCategory, onChangeText, onPickCategory, onPickPrompt, onSubmit }) {
+function HomePage({ goToPage, askText, askCategory, onChangeText, onPickCategory, onPickPrompt, onSubmit, onStartMorningConversation }) {
   const [sensorIndex, setSensorIndex] = useState(0)
   const [sensorVisible, setSensorVisible] = useState(true)
+  const [sleepIndex, setSleepIndex] = useState(0)
+  const [homeActionToast, setHomeActionToast] = useState(null)
 
   useEffect(() => {
     let timeoutId
@@ -1176,6 +1259,48 @@ function HomePage({ goToPage, askText, askCategory, onChangeText, onPickCategory
       window.clearTimeout(timeoutId)
     }
   }, [])
+
+  useEffect(() => {
+    const sleepTimer = window.setInterval(() => {
+      setSleepIndex((current) => (current + 1) % sleepAnalysisReadings.length)
+    }, 1000 * 60 * 60 * 3)
+
+    return () => window.clearInterval(sleepTimer)
+  }, [])
+
+  useEffect(() => {
+    if (!homeActionToast) return undefined
+
+    const toastTimer = window.setTimeout(() => {
+      setHomeActionToast(null)
+    }, 2800)
+
+    return () => window.clearTimeout(toastTimer)
+  }, [homeActionToast])
+
+  const handleQuickAction = useCallback((action) => {
+    if (action === '設定明日鬧鐘') {
+      onStartMorningConversation?.()
+      return
+    }
+
+    if (action === '關閉臥室燈') {
+      setHomeActionToast({
+        icon: 'lightbulb',
+        title: '臥室燈已關閉',
+        description: '已替你把臥室燈光切到關閉狀態。',
+      })
+      return
+    }
+
+    if (action === '開啟專注模式') {
+      setHomeActionToast({
+        icon: 'bolt',
+        title: '已開啟專注模式',
+        description: '接下來會降低干擾提醒，保留重要事項。',
+      })
+    }
+  }, [onStartMorningConversation])
 
   const homeSummaryCards = useMemo(
     () => [
@@ -1195,9 +1320,13 @@ function HomePage({ goToPage, askText, askCategory, onChangeText, onPickCategory
         bar: indoorTemperatureReadings[sensorIndex].bar,
         animated: true,
       },
-      ...summaryCards.slice(1),
+      {
+        ...summaryCards[1],
+        ...sleepAnalysisReadings[sleepIndex],
+      },
+      summaryCards[2],
     ],
-    [sensorIndex],
+    [sensorIndex, sleepIndex],
   )
 
   return (
@@ -1235,7 +1364,7 @@ function HomePage({ goToPage, askText, askCategory, onChangeText, onPickCategory
             {card.actions ? (
               <div className="quick-actions summary-actions">
                 {card.actions.map((action) => (
-                  <button key={action} type="button">
+                  <button key={action} type="button" onClick={() => handleQuickAction(action)}>
                     <Icon name="arrow_right" small />
                     {action}
                   </button>
@@ -1257,6 +1386,16 @@ function HomePage({ goToPage, askText, askCategory, onChangeText, onPickCategory
           </article>
         ))}
       </section>
+
+      {homeActionToast ? (
+        <div className="home-action-toast glass" role="status" aria-live="polite">
+          <Icon name={homeActionToast.icon} />
+          <div>
+            <strong>{homeActionToast.title}</strong>
+            <p>{homeActionToast.description}</p>
+          </div>
+        </div>
+      ) : null}
 
       <div className="modules-header">
         <h3>常用模組</h3>
@@ -1405,10 +1544,92 @@ function AssistantPage({ morningFlow, morningFlowView }) {
   return <ReminderRoutineFlow key="assistant-reminder-flow" />
 }
 
+function RoutineCheckCard({ icon, title, accent = 'info', summary, details = [], children, defaultOpen = false }) {
+  const [open, setOpen] = useState(defaultOpen)
+
+  return (
+    <section className={`routine-check-card glass ${accent} ${open ? 'open' : ''}`}>
+      <button type="button" className="routine-check-head" onClick={() => setOpen((value) => !value)} aria-expanded={open}>
+        <span className="routine-check-icon"><Icon name={icon} /></span>
+        <span className="routine-check-copy">
+          <strong>{title}</strong>
+          <small>{summary}</small>
+        </span>
+        <span className="routine-check-toggle"><Icon name={open ? 'arrow_upward' : 'arrow_downward'} small /></span>
+      </button>
+      {open ? (
+        <div className="routine-check-body">
+          {children || details.map((detail) => <span key={detail}>{detail}</span>)}
+        </div>
+      ) : null}
+    </section>
+  )
+}
+
+function PeaceTodoCard({ item, onAction }) {
+  const [open, setOpen] = useState(false)
+  const done = item.status === 'completed'
+  const snoozed = item.status === 'snoozed'
+
+  return (
+    <article className={`peace-card todo-peace-card glass ${item.status} ${item.tone} ${open ? 'open' : ''}`}>
+      <label className="peace-todo-check" aria-label={`標記 ${item.title} 已完成`}>
+        <input type="checkbox" checked={done} onChange={() => onAction(item.id, 'completed')} disabled={done} />
+        <span aria-hidden="true" />
+      </label>
+
+      <div className="peace-todo-main">
+        <div className="peace-card-top">
+          <div className="peace-todo-title-row">
+            <span className="peace-card-icon"><Icon name={item.icon} small /></span>
+            <div>
+              <p className="summary-kicker">{item.category}</p>
+              <h4>{item.title}</h4>
+            </div>
+          </div>
+          <div className="peace-state-stack">
+            {item.tone === 'urgent' ? <span className={`peace-priority ${item.tone}`}>{item.tag}</span> : null}
+            {done ? <span className="completed-pill"><Icon name="check_circle" small />已完成</span> : snoozed ? <span className="snoozed-pill">已延後</span> : null}
+          </div>
+        </div>
+
+        <p>{item.caption}</p>
+
+        <button type="button" className="peace-detail-toggle" onClick={() => setOpen((value) => !value)} aria-expanded={open}>
+          {open ? '收合細節' : '展開細節'}
+          <Icon name={open ? 'arrow_upward' : 'arrow_downward'} small />
+        </button>
+
+        {open ? (
+          <div className="peace-detail-panel">
+            <p>{item.detail}</p>
+            <div className="peace-mini-checklist">
+              {item.checklist.map((entry) => (
+                <span key={entry}><Icon name="check_circle" small />{entry}</span>
+              ))}
+            </div>
+          </div>
+        ) : null}
+
+        <div className="peace-card-actions">
+          <button type="button" className="primary-action" onClick={() => onAction(item.id, 'completed')} disabled={done}>
+            已完成
+          </button>
+          <button type="button" className="secondary-action" onClick={() => onAction(item.id, 'snoozed')} disabled={done}>
+            {item.actionSecondary}
+          </button>
+        </div>
+      </div>
+    </article>
+  )
+}
+
 function StepTimeline({ steps }) {
   const activeStepRef = useRef(null)
   const activeStep = steps.find((step) => step.status === 'processing')
   const activeStepId = activeStep?.id
+  const allStepsDone = steps.every((step) => step.status === 'success')
+  const [collapsed, setCollapsed] = useState(false)
 
   useEffect(() => {
     if (!activeStepId) return undefined
@@ -1424,42 +1645,66 @@ function StepTimeline({ steps }) {
     return () => window.clearTimeout(focusTimer)
   }, [activeStepId])
 
+  useEffect(() => {
+    if (!allStepsDone) return undefined
+    const collapseTimer = window.setTimeout(() => setCollapsed(true), 900)
+    return () => window.clearTimeout(collapseTimer)
+  }, [allStepsDone])
+
   return (
-    <section className="step-timeline" aria-label="流程步驟">
-      {steps.map((step, index) => {
-        const isProcessing = step.status === 'processing'
-        return (
-          <article
-            key={step.id}
-            ref={isProcessing ? activeStepRef : null}
-            className={`step-card ${step.status}${isProcessing ? ' current-step' : ''}`}
-            aria-current={isProcessing ? 'step' : undefined}
-          >
-            {isProcessing ? <span className="current-step-pill">目前正在處理</span> : null}
-            <div className="step-card-head">
-              <div className="step-icon">
-                <Icon name={step.status === 'success' ? 'check' : step.icon} small />
-              </div>
-              <div>
-                <p>Step {index + 1}</p>
-                <h4>{step.title}</h4>
-              </div>
-            </div>
-            <p className="step-card-copy">
-              {isProcessing ? <span className="running-dot" aria-hidden="true" /> : null}
-              {step.status === 'success' ? step.completed : step.processing}
-            </p>
-            <div
-              className="step-progress"
-              aria-label={`${step.title} 進度 ${Math.round(step.progress)}%`}
-              style={{ '--step-progress-duration': `${step.progressDuration || 220}ms` }}
-            >
-              <span style={{ width: `${step.progress}%` }} />
-            </div>
-            {step.id === 'wake-plan' && step.status === 'success' ? <WakePlanResult /> : null}
-          </article>
-        )
-      })}
+    <section className={`step-timeline-wrap ${collapsed ? 'collapsed' : ''}`} aria-label="流程步驟">
+      <button
+        type="button"
+        className="step-timeline-summary"
+        onClick={() => setCollapsed((value) => !value)}
+        aria-expanded={!collapsed}
+      >
+        <span className="step-summary-icon"><Icon name={allStepsDone ? 'check_circle' : 'schedule'} small /></span>
+        <span>
+          <strong>{allStepsDone ? '流程已完成，步驟已收合' : activeStep ? `正在處理：${activeStep.title}` : '流程準備中'}</strong>
+          <small>{allStepsDone ? '點一下可以展開查看 4 個檢查步驟。' : '完成後會自動收合，保留重點結果。'}</small>
+        </span>
+        <Icon name={collapsed ? 'arrow_downward' : 'arrow_upward'} small />
+      </button>
+
+      {!collapsed ? (
+        <div className="step-timeline" aria-label="流程步驟明細">
+          {steps.map((step, index) => {
+            const isProcessing = step.status === 'processing'
+            return (
+              <article
+                key={step.id}
+                ref={isProcessing ? activeStepRef : null}
+                className={`step-card ${step.status}${isProcessing ? ' current-step' : ''}`}
+                aria-current={isProcessing ? 'step' : undefined}
+              >
+                {isProcessing ? <span className="current-step-pill">目前正在處理</span> : null}
+                <div className="step-card-head">
+                  <div className="step-icon">
+                    <Icon name={step.status === 'success' ? 'check' : step.icon} small />
+                  </div>
+                  <div>
+                    <p>Step {index + 1}</p>
+                    <h4>{step.title}</h4>
+                  </div>
+                </div>
+                <p className="step-card-copy">
+                  {isProcessing ? <span className="running-dot" aria-hidden="true" /> : null}
+                  {step.status === 'success' ? step.completed : step.processing}
+                </p>
+                <div
+                  className="step-progress"
+                  aria-label={`${step.title} 進度 ${Math.round(step.progress)}%`}
+                  style={{ '--step-progress-duration': `${step.progressDuration || 220}ms` }}
+                >
+                  <span style={{ width: `${step.progress}%` }} />
+                </div>
+                {step.id === 'wake-plan' && step.status === 'success' ? <WakePlanResult /> : null}
+              </article>
+            )
+          })}
+        </div>
+      ) : null}
     </section>
   )
 }
@@ -1727,29 +1972,6 @@ function ReminderProgressOverview({ dailyProgress, monthlyProgress, recentDays }
         <MonthlyProgressCard progress={monthlyProgress} recentDays={recentDays} />
       </div>
 
-      <div className="progress-stat-grid" aria-label="今日提醒統計">
-        <ProgressStatChip
-          tone="completed"
-          icon="check_circle"
-          label="已完成"
-          value={`${dailyProgress.completed} 項`}
-          description="今天已經完成的生活提醒"
-        />
-        <ProgressStatChip
-          tone="pending"
-          icon="task_alt"
-          label="未完成"
-          value={`${dailyProgress.pending} 項`}
-          description="還沒處理，但可以慢慢安排"
-        />
-        <ProgressStatChip
-          tone="due"
-          icon="schedule"
-          label="快到時間"
-          value={`${dailyProgress.dueSoon} 項`}
-          description="接下來 30 分鐘內需要注意"
-        />
-      </div>
     </section>
   )
 }
@@ -1759,9 +1981,9 @@ function DailyProgressCard({ progress }) {
     ? '今天的生活提醒都整理好了，可以安心休息。'
     : `目前已完成 ${progress.completed} 項，還有 ${progress.pending} 項待處理，其中 ${progress.dueSoon} 項快到時間。`
   const rhythmItems = [
-    { icon: 'check_circle', label: '已收起', value: `${progress.completed} 項`, tone: 'done' },
-    { icon: 'task_alt', label: '慢慢安排', value: `${progress.pending} 項`, tone: 'pending' },
-    { icon: 'schedule', label: '先照顧', value: `${progress.dueSoon} 項`, tone: 'due' },
+    { icon: 'check_circle', label: '已完成', value: `${progress.completed} 項`, tone: 'done' },
+    { icon: 'task_alt', label: '待處理', value: `${progress.pending} 項`, tone: 'pending' },
+    { icon: 'schedule', label: '快到', value: `${progress.dueSoon} 項`, tone: 'due' },
   ]
 
   return (
@@ -1809,30 +2031,17 @@ function MonthlyProgressCard({ progress, recentDays }) {
       <div className="monthly-progress-bar" aria-label={`本月完成率 ${progress.completionRate}%`}>
         <span style={{ width: `${progress.completionRate}%` }} />
       </div>
-      <div className="monthly-chip-list">
-        <span>本月已完成：{progress.completed} 項</span>
-        <span>本月未完成：{progress.pending} 項</span>
-        <span>可補救提醒：{progress.recoverable} 項</span>
-        <span>連續整理：{progress.streakDays} 天</span>
+      <div className="monthly-chip-list concise">
+        <span>完成 {progress.completed}</span>
+        <span>待處理 {progress.pending}</span>
+        <span>可補救 {progress.recoverable}</span>
+        <span>連續 {progress.streakDays} 天</span>
       </div>
       <RecentDaysRhythm days={recentDays} />
-      <p className="progress-ai-note">這個月已完成 {progress.completed} 項生活提醒，整體節奏維持得不錯。</p>
     </article>
   )
 }
 
-function ProgressStatChip({ tone, icon, label, value, description }) {
-  return (
-    <article className={`progress-stat-chip ${tone}`}>
-      <Icon name={icon} />
-      <div>
-        <span>{label}</span>
-        <strong>{value}</strong>
-        <p>{description}</p>
-      </div>
-    </article>
-  )
-}
 
 function RecentDaysRhythm({ days }) {
   return (
@@ -2050,7 +2259,7 @@ function TasksPage({ currentFullDateTime, onStartReminderChat, reminderFlowReque
                 <p>
                   {allRemindersComplete
                     ? '今天重要的提醒都整理好了。你可以把腦袋放鬆一點，不用一直反覆想有沒有漏掉什麼。'
-                    : '我幫你把提醒分好節奏：已完成的先收起來，快到時間的先照顧，其他的晚點再慢慢安排。'}
+                    : '我幫你把提醒分好節奏：已完成的先放一邊，快到時間的優先看，其他待處理項目晚點再安排。'}
                 </p>
               </div>
             </section>
@@ -2443,10 +2652,8 @@ function ReminderRoutineFlow() {
             <h3>睡前安心清單 AI Chat</h3>
             <p>我可以直接跟你對話，幫你先整理今晚真正重要的 3 件事，再把不重要的提醒收起來。</p>
           </div>
-          <div className="reminder-routine-status-row">
-            <span className="status-chip connected"><Icon name="event_available" small />Google Calendar</span>
-            <span className="status-chip time"><Icon name="schedule" small />16:33</span>
-            <span className="status-chip weather">晴朗</span>
+          <div className="reminder-routine-status-row single-status">
+            <span className="status-chip connected"><Icon name="check_circle" small />Google Calendar Live</span>
           </div>
         </div>
 
@@ -2522,61 +2729,46 @@ function ReminderRoutineFlow() {
         {phase !== 'confirm' ? <StepTimeline steps={steps} /> : null}
 
         {steps.find((step) => step.id === 'calendar')?.status === 'success' ? (
-          <section className="routine-result-card glass">
-            <p className="summary-kicker">CALENDAR CHECK</p>
-            <h4>明日行程已確認</h4>
-            <div className="routine-result-list">
-              <span>明日第一個行程：09:00 專案同步會議</span>
-              <span>建議出門時間：08:20</span>
-              <span>需要準備：識別證、鑰匙、筆電充電器</span>
-            </div>
-          </section>
+          <RoutineCheckCard
+            icon="calendar_month"
+            title="明日行程已確認"
+            summary="09:00 專案同步會議，建議 08:20 出門。"
+            accent="calendar"
+            details={['明日第一個行程：09:00 專案同步會議', '建議出門時間：08:20', '需要準備：識別證、鑰匙、筆電充電器']}
+          />
         ) : null}
 
         {steps.find((step) => step.id === 'reminders')?.status === 'success' ? (
-          <section className="routine-result-card glass">
-            <p className="summary-kicker">REMINDER CHECK</p>
-            <h4>生活提醒已整理</h4>
-            <div className="routine-result-list compact">
-              <span>今晚真正需要注意：3 項</span>
-              <span>可延後事項：1 項</span>
-              <span>已略過低優先提醒：1 項</span>
-            </div>
-          </section>
+          <RoutineCheckCard
+            icon="notifications_active"
+            title="生活提醒已整理"
+            summary="今晚真正需要注意 3 項，其他低優先提醒先收起。"
+            accent="reminder"
+            details={['今晚真正需要注意：3 項', '可延後事項：1 項', '已略過低優先提醒：1 項']}
+          />
         ) : null}
 
         {showBatteryCard ? (
-          <section className="routine-result-card glass battery-warning-card">
-            <p className="summary-kicker">BATTERY CHECK</p>
-            <h4>裝置電量提醒</h4>
-            <div className="routine-result-list battery-list">
-              <span>iPhone：{batteryStatus.iPhone.percent}%，{batteryStatus.iPhone.status === 'low' ? '低電量，未充電' : '狀態正常'}</span>
-              <span>Apple Watch：{batteryStatus.appleWatch.percent}%，{batteryStatus.appleWatch.status === 'low' ? '建議充電' : '狀態正常'}</span>
-              <span>隨身充：{batteryStatus.powerBank.percent}%，{batteryStatus.powerBank.status === 'low' ? '低電量，建議補電' : '狀態正常'}</span>
-              <span>耳機：{batteryStatus.earbuds.percent}%，{batteryStatus.earbuds.status === 'medium' ? '可用但建議順手充電' : '狀態正常'}</span>
+          <RoutineCheckCard
+            icon="battery_alert"
+            title="裝置電量提醒"
+            summary="iPhone、Apple Watch 與隨身充電量偏低，睡前建議先補電。"
+            accent="battery"
+            defaultOpen
+          >
+            <div className="battery-compact-list">
+              <span className="critical">iPhone：{batteryStatus.iPhone.percent}% · 低電量，未充電</span>
+              <span className="warning">Apple Watch：{batteryStatus.appleWatch.percent}% · 建議充電</span>
+              <span className="critical">隨身充：{batteryStatus.powerBank.percent}% · 低電量，建議補電</span>
+              <span>耳機：{batteryStatus.earbuds.percent}% · 可用，建議順手充電</span>
             </div>
-          </section>
+          </RoutineCheckCard>
         ) : null}
 
         {showChecklistCards ? (
           <section className="peace-check-grid" aria-label="今晚安心清單" ref={checklistResultRef}>
             {checklist.map((item) => (
-              <article key={item.id} className={`peace-card glass ${item.status}`}>
-                <div className="peace-card-top">
-                  <p className="summary-kicker">{item.tag}</p>
-                  {item.status === 'completed' ? <span className="completed-pill"><Icon name="check_circle" small />已完成</span> : item.status === 'snoozed' ? <span className="snoozed-pill">稍後提醒</span> : null}
-                </div>
-                <h4>{item.title}</h4>
-                <p>{item.caption}</p>
-                <div className="peace-card-actions">
-                  <button type="button" className="primary-action" onClick={() => handleChecklistAction(item.id, 'completed')} disabled={item.status === 'completed'}>
-                    已完成
-                  </button>
-                  <button type="button" className="secondary-action" onClick={() => handleChecklistAction(item.id, 'snoozed')} disabled={item.status === 'completed'}>
-                    {item.actionSecondary}
-                  </button>
-                </div>
-              </article>
+              <PeaceTodoCard key={item.id} item={item} onAction={handleChecklistAction} />
             ))}
           </section>
         ) : null}
@@ -2695,6 +2887,9 @@ function SettingsPage({ theme, setTheme, goToPage }) {
   }
 
   const toggleSetting = (group, key) => {
+    const nextOn = !settings[group][key]
+    const copy = settingsCopy[group]?.[key]
+
     setSettings((current) => ({
       ...current,
       [group]: {
@@ -2703,14 +2898,11 @@ function SettingsPage({ theme, setTheme, goToPage }) {
       },
     }))
 
-    if (group === 'sleepAutomation' && key === 'autoSleepMode') {
-      const nextOn = !settings.sleepAutomation.autoSleepMode
-      showSettingsToast({
-        icon: nextOn ? 'bedtime' : 'check_circle',
-        title: nextOn ? '睡眠自動提醒已開啟' : '睡眠自動提醒已關閉',
-        description: nextOn ? '系統會依照時間，在睡前提醒你啟動睡眠模式。' : '睡眠模式改為手動啟動。',
-      })
-    }
+    showSettingsToast({
+      icon: nextOn ? 'check_circle' : 'notifications_active',
+      title: copy ? (nextOn ? copy[2] : copy[3]) : `${key} 已${nextOn ? '開啟' : '關閉'}。`,
+      description: copy ? copy[1] : '設定已更新，Demo 狀態會依照目前偏好顯示。',
+    })
   }
 
   const changeTheme = (nextTheme) => {
