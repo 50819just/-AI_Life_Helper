@@ -8616,3 +8616,88 @@ html.dark .peace-check-grid .todo-peace-card:not(.urgent) p {
 .dark .chat-demo-card .chat-message.user p {
   color: #e6efff !important;
 }
+
+/* Tablet RWD restore: keep desktop right-side functions visible without letting grids overflow. */
+@media (max-width: 920px) and (min-width: 561px) {
+  .content-inner > *,
+  .summary-grid,
+  .module-grid,
+  .detail-grid,
+  .settings-grid,
+  .settings-control-center,
+  .devices-top-grid,
+  .coming-grid,
+  .device-grid {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .summary-grid,
+  .module-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 16px;
+    justify-self: stretch;
+  }
+
+  .summary,
+  .module {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .summary {
+    padding: 18px;
+  }
+
+  .summary-head {
+    gap: 12px;
+  }
+
+  .summary-icon {
+    width: 54px;
+    height: 54px;
+  }
+
+  .summary-value-row strong {
+    font-size: 1.55rem;
+  }
+
+  .quick-actions button {
+    min-width: 0;
+    padding-inline: 12px;
+  }
+
+  .reminder-chat-workspace {
+    grid-template-columns: minmax(190px, 220px) minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+  }
+
+  .reminder-chat-sidebar {
+    position: sticky;
+    top: 16px;
+    inset: auto;
+    z-index: auto;
+    max-width: none;
+    margin-left: 0;
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+    display: grid;
+  }
+
+  .reminder-status-panel {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mobile-recent-chat-button,
+  .mobile-chat-scrim {
+    display: none;
+  }
+}
